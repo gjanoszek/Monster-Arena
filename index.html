@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="MonsterBattle.js"></script>
+    <link rel="stylesheet" href="css.css"/>
+</head>
+<body>
+
+
+<h1 id="title">Welcome to Monster Battle</h1>
+<div class="gracz" id="gracz1">
+    <h3>Player 1</h3>
+    <h4>Name</h4>
+    <p>
+        <input id="name1" class="userdata" type="text" placeholder="Name"/>
+    </p>
+    <h4>HP</h4>
+    <p>
+        <input id="hp1" class="userdata" type="text" placeholder="HP"/>
+    </p>
+    <h4>Max damage</h4>
+    <p>
+        <input id="maxDamage1" class="userdata" type="text" placeholder="Max damage"/>
+    </p>
+    <h4>Min damage</h4>
+    <p>
+        <input id="minDamage1" class="userdata" type="text" placeholder="Min damage"/>
+    </p>
+    <h4>Critic Chance Multiplier (smaller = bigger chance for critic) - Default: 1</h4>
+    <p>
+        <input id="criticMultiplier1" class="userdata" type="text" placeholder="Critic Chance Multiplier (defalut - 1)"/>
+    </p>
+    <h4>Miss chance multiplier (bigger = smaller chance for miss) - Default: 10</h4>
+    <p>
+        <input id="missMultiplier1" class="userdata" type="text" placeholder="Miss chance multiplier (default - 10)"/>
+    </p>
+    <textarea id="log1" class="console" name="log" id="gracz1log" cols="40" rows="20"></textarea>
+</div>
+
+<div class="buttons">
+<button id="beginBattle">Begin battle</button>
+<button id="reset">RESET</button>
+<button id="clear">Clear</button>
+</div>
+
+<div class="presets">
+    <h3>Presets</h3>
+    <p>You can select already predefined mosters presets here (choose player first)</p>
+    <button id="btnplayer1">Player 1</button>
+    <button id="btnplayer2">Player 2</button>
+    <p>Select preset here</p>
+    <button id="skeleton">Skeleton</button>
+    <button id="ghost">Ghost</button>
+    <button id="warrior">Warrior</button>
+    <button id="troll">Troll</button>
+</div>
+
+<div class="gracz" id="gracz2">
+    <h3>Player 2</h3>
+    <h4>Name</h4>
+    <p>
+        <input id="name2" class="userdata" type="text" placeholder="Name"/>
+    </p>
+    <h4>HP</h4>
+    <p>
+        <input id="hp2" class="userdata" type="text" placeholder="HP"/>
+    </p>
+    <h4>Max damage</h4>
+    <p>
+        <input id="maxDamage2" class="userdata" type="text" placeholder="Max damage"/>
+    </p>
+    <h4>Min damage</h4>
+    <p>
+        <input id="minDamage2" class="userdata" type="text" placeholder="Min damage"/>
+    </p>
+    <h4>Critic Chance Multiplier (smaller = bigger chance for critic) - Default: 1</h4>
+    <p>
+        <input id="criticMultiplier2" class="userdata" type="text" placeholder="Critic Chance Multiplier (defalut - 1)"/>
+    </p>
+    <h4>Miss chance multiplier (bigger = smaller chance for miss) - Default: 10</h4>
+    <p>
+        <input id="missMultiplier2" class="userdata" type="text" placeholder="Miss chance multiplier (default - 10)"/>
+    </p>
+    <textarea id="log2" class="console" name="log" id="gracz2log" cols="40" rows="20"></textarea>
+</div>
+
+</body>
+</html>

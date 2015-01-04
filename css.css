@@ -1,0 +1,32 @@
+.gracz {
+    background-color: gray;
+
+}
+#gracz1 {
+    display: inline-block;
+    float: left
+}
+
+#gracz2 {
+    display: inline-block;
+    float: left;
+}
+
+.presets {
+    background-color: gray;
+    display: table;
+    float: left;
+}
+
+#title {
+    color: black;
+    position: relative;
+    left: 550px;
+
+}
+
+.buttons {
+    position: fixed;
+    top: 280px;
+    left: 650px;
+}
