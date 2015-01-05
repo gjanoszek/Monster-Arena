@@ -1,18 +1,18 @@
 /**
-* Created by wetcouch on 12.10.14.
-*/
+ * Created by wetcouch on 12.10.14.
+ */
 
-var Monster = function(opts) {
-    this.nazwa = opts.nazwa;
-    this.hp = opts.hp;
-    this.maxDmg = opts.maxDmg;
-    this.minDmg = opts.minDmg;
-    this.critMult = opts.critMult;
-    this.missMult = opts.missMult;
+var Monster = function (opts) {
+        this.nazwa = opts.nazwa;
+        this.hp = opts.hp;
+        this.maxDmg = opts.maxDmg;
+        this.minDmg = opts.minDmg;
+        this.critMult = opts.critMult;
+        this.missMult = opts.missMult;
     },
     monster1,
     monster2,
-    getMonsterInitData = function(monsterNum) {
+    getMonsterInitData = function (monsterNum) {
         return {
             nazwa: $("#name" + monsterNum).val(),
             hp: parseInt($("#hp" + monsterNum).val(), 10),
@@ -28,37 +28,37 @@ var Monster = function(opts) {
     isCritic,
     isAccurate;
 
-Monster.prototype.przedstawSie = function() {
+Monster.prototype.przedstawSie = function () {
     return this.nazwa;
 };
 
-    Monster.prototype.uderz = function(monsterNum) {
-        var attackingMonster = window['monster' + monsterNum],
-            critic = Math.random()*attackingMonster.critMult,
-            missChance = Math.floor(Math.random()*attackingMonster.missMult);
+Monster.prototype.uderz = function (monsterNum) {
+    var attackingMonster = window['monster' + monsterNum],
+        critic = Math.random() * attackingMonster.critMult,
+        missChance = Math.floor(Math.random() * attackingMonster.missMult);
 
-        isCritic = critic <= 0.14;
+    isCritic = critic <= 0.14;
 
-        if (missChance >= 2) {
-            isAccurate = true;
+    if (missChance >= 2) {
+        isAccurate = true;
+    } else {
+        isAccurate = false;
+    }
+
+    if (isAccurate === true) {
+        uderzenie = Math.floor(Math.random() * (this.maxDmg - this.minDmg)) + this.minDmg;
+        if (isCritic) {
+            uderzenie *= 3;
+            console.log(window['monster' + monsterNum].przedstawSie() + ' zadaje obrażenia krytyczne.');
         } else {
-            isAccurate = false;
+            console.log(window['monster' + monsterNum].przedstawSie() + ' hits with ' + uderzenie + ' damage.');
         }
-
-        if (isAccurate === true) {
-            uderzenie = Math.floor(Math.random() * (this.maxDmg - this.minDmg)) + this.minDmg;
-            if (isCritic) {
-                uderzenie *= 3;
-                console.log(window['monster' + monsterNum].przedstawSie() + ' zadaje obrażenia krytyczne.');
-            } else {
-                console.log(window['monster' + monsterNum].przedstawSie() + ' hits with ' + uderzenie + ' damage.');
-            }
-        } else {
-            uderzenie = 0;
-            critic = 0.14;
-            isCritic = critic <= 0.13;
-            console.log(window['monster' + monsterNum].przedstawSie() + ' miss!');
-        }
+    } else {
+        uderzenie = 0;
+        critic = 0.14;
+        isCritic = critic <= 0.13;
+        console.log(window['monster' + monsterNum].przedstawSie() + ' miss!');
+    }
 
 
     return {
@@ -69,7 +69,7 @@ Monster.prototype.przedstawSie = function() {
 
 };
 
-var raport = function(player, daneUderzenia, monsterNum) {
+var raport = function (player, daneUderzenia, monsterNum) {
     var currentLogVal = window['log' + monsterNum].val();
     if (daneUderzenia.isCritic) {
         newLogVal = currentLogVal + "\n" + (player.przedstawSie() + ' deals critic ' + daneUderzenia.uderzenie + ' damage.');
@@ -81,13 +81,13 @@ var raport = function(player, daneUderzenia, monsterNum) {
     window['log' + monsterNum].val(newLogVal);
 };
 
-var fight = function() {
+var fight = function () {
     var winner,
         m1DaneUderzenia,
         m2DaneUderzenia;
 
     // walka:
-    while(monster1.hp > 0 && monster2.hp > 0) {
+    while (monster1.hp > 0 && monster2.hp > 0) {
         m2DaneUderzenia = monster2.uderz(2);
         m1DaneUderzenia = monster1.uderz(1);
 
@@ -99,12 +99,12 @@ var fight = function() {
     }
 
     // analiza walki:
-    if(monster1.hp <= 0 && monster2.hp <= 0) {
+    if (monster1.hp <= 0 && monster2.hp <= 0) {
         alert("Everyone's dead...end of game!");
-    } else if(monster1.hp > monster2.hp) {
+    } else if (monster1.hp > monster2.hp) {
         winner = monster1;
         alert('The winner is...' + winner.przedstawSie() + '!');
-    } else if(monster2.hp > monster1.hp) {
+    } else if (monster2.hp > monster1.hp) {
         winner = monster2;
         alert('The winner is...' + winner.przedstawSie() + '!');
     }
@@ -112,9 +112,7 @@ var fight = function() {
 };
 
 
-
-
-$(document).ready(function($) {
+$(document).ready(function ($) {
     var beginBattle = $("#beginBattle"),
         userdata = $(".userdata"),
         selectedPlayer = 1,
@@ -129,8 +127,7 @@ $(document).ready(function($) {
     log2 = $("#log2");
 
 
-
-    beginBattle.click(function() {
+    beginBattle.click(function () {
         var monster1opts = getMonsterInitData(1),
             monster2opts = getMonsterInitData(2);
 
@@ -141,12 +138,12 @@ $(document).ready(function($) {
         monster2 = new Monster(monster2opts);
         fight();
     });
-    $("#reset").click(function() {
+    $("#reset").click(function () {
         beginBattle.removeAttr("disabled");
         userdata.removeAttr("disabled");
         $('.console').val('');
     });
-    $("#clear").click(function() {
+    $("#clear").click(function () {
         userdata.val('');
         btnPlayer1.removeAttr("disabled");
         btnPlayer2.removeAttr("disabled");
@@ -162,7 +159,7 @@ $(document).ready(function($) {
         selectedPlayer = 2;
     });
 
-    preset = function(name, hp, maxDmg, minDmg, critMult, missMult) {
+    preset = function (name, hp, maxDmg, minDmg, critMult, missMult) {
         $('#name' + selectedPlayer).val(name);
         $('#hp' + selectedPlayer).val(hp);
         $('#maxDamage' + selectedPlayer).val(maxDmg);
@@ -171,16 +168,16 @@ $(document).ready(function($) {
         $('#missMultiplier' + selectedPlayer).val(missMult);
     };
 
-    skeletonP.click(function(){
+    skeletonP.click(function () {
         preset('Skeleton', '80', '9', '1', '1.4', '15');
     });
-    ghostP.click(function() {
+    ghostP.click(function () {
         preset('Ghost', '75', '8', '3', '1', '10');
     });
-    warriorP.click(function() {
+    warriorP.click(function () {
         preset('Warrior', '120', '4', '3', '1', '10');
     });
-    trollP.click(function() {
+    trollP.click(function () {
         preset('Troll', '90', '5', '4', '0.6', '7');
     });
 });
