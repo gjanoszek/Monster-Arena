@@ -1,34 +1,65 @@
-
-.gracz {
-    background-color: gray;
-
-}
-#gracz1 {
-    display: inline-block;
-    float: left
+body {
+    background: rgb(60,	60,	60);
+    color: rgb(245, 245, 245);
 }
 
-#gracz2 {
-    display: inline-block;
-    float: left;
+input, select, textarea {
+    background-color: #222222;
+    text-decoration: none;
 }
 
-.presets {
-    background-color: gray;
-    display: table;
-    float: left;
+.monsters > li {
+    cursor: pointer;
+    color: #222222;
 }
 
-#title {
-    color: black;
-    position: relative;
-    left: 550px;
-
+.monsters > li:hover {
+    background-color: #222222;
+    color: #ffa517;
 }
 
-.buttons {
-    position: fixed;
-    top: 280px;
-    left: 650px;
+.wrapper {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    text-align: center;
 }
+
+.wrapper > * {
+    padding: 10px;
+}
+
+.header {
+    background: tomato;
+    flex: 1 100%;
+}
+
+.footer {
+    order: 4;
+    flex: 1 100%;
+}
+
+.main {
+    order: 2;
+    flex: 1;
+}
+
+.aside-1 {
+    order: 1;
+    flex: 3;
+}
+
+.aside-2 {
+    order: 3;
+    flex: 3;
+}
+
+
+.vs {
+    font-size: 3em;
+}
+
+
+
+
 

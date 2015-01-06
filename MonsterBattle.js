@@ -115,13 +115,12 @@ var fight = function () {
 $(document).ready(function ($) {
     var beginBattle = $("#beginBattle"),
         userdata = $(".userdata"),
-        selectedPlayer = 1,
-        btnPlayer1 = $("#btnplayer1"),
-        btnPlayer2 = $("#btnplayer2"),
-        skeletonP = $("#skeleton"),
-        ghostP = $("#ghost"),
-        warriorP = $("#warrior"),
-        trollP = $("#troll");
+        monsters = [
+            ['Skeleton', 80, 9, 1, 1.4, 15],
+            ['Ghost', 75, 8, 3, 1, 10],
+            ['Warrior', 120, 4, 3, 1, 10],
+            ['Troll', 90, 5, 4, 0.6, 7]
+        ];
 
     log1 = $("#log1");
     log2 = $("#log2");
@@ -131,53 +130,38 @@ $(document).ready(function ($) {
         var monster1opts = getMonsterInitData(1),
             monster2opts = getMonsterInitData(2);
 
-        $(this).attr("disabled", "disabled");
-        userdata.attr("disabled", "disabled");
+        $('.console').val('');
 
         monster1 = new Monster(monster1opts);
         monster2 = new Monster(monster2opts);
-        fight();
-    });
-    $("#reset").click(function () {
-        beginBattle.removeAttr("disabled");
-        userdata.removeAttr("disabled");
-        $('.console').val('');
-    });
-    $("#clear").click(function () {
-        userdata.val('');
-        btnPlayer1.removeAttr("disabled");
-        btnPlayer2.removeAttr("disabled");
-    });
-    btnPlayer1.click(function () {
-        btnPlayer1.attr("disabled", "disabled");
-        btnPlayer2.removeAttr("disabled");
-        selectedPlayer = 1;
-    });
-    btnPlayer2.click(function () {
-        btnPlayer2.attr("disabled", "disabled");
-        btnPlayer1.removeAttr("disabled");
-        selectedPlayer = 2;
+
+        setTimeout(fight, 650);
+
     });
 
-    preset = function (name, hp, maxDmg, minDmg, critMult, missMult) {
-        $('#name' + selectedPlayer).val(name);
-        $('#hp' + selectedPlayer).val(hp);
-        $('#maxDamage' + selectedPlayer).val(maxDmg);
-        $('#minDamage' + selectedPlayer).val(minDmg);
-        $('#criticMultiplier' + selectedPlayer).val(critMult);
-        $('#missMultiplier' + selectedPlayer).val(missMult);
+
+    preset = function (name, hp, maxDmg, minDmg, critMult, missMult, playerNum) {
+        $('#name' + playerNum).val(name);
+        $('#hp' + playerNum).val(hp);
+        $('#maxDamage' + playerNum).val(maxDmg);
+        $('#minDamage' + playerNum).val(minDmg);
+        $('#criticMultiplier' + playerNum).val(critMult);
+        $('#missMultiplier' + playerNum).val(missMult);
     };
 
-    skeletonP.click(function () {
-        preset('Skeleton', '80', '9', '1', '1.4', '15');
+
+    $('.monsters li').click(function() {
+        var data = $(this).data(),
+            monsterId = parseInt(data.monsterid, 10),
+            playerId = parseInt(data.playerid, 10),
+            presetParams = monsters[monsterId].slice().concat(playerId);
+
+        preset.apply(null, presetParams);
     });
-    ghostP.click(function () {
-        preset('Ghost', '75', '8', '3', '1', '10');
-    });
-    warriorP.click(function () {
-        preset('Warrior', '120', '4', '3', '1', '10');
-    });
-    trollP.click(function () {
-        preset('Troll', '90', '5', '4', '0.6', '7');
-    });
+
+    // set default monsters:
+    preset.apply(this, monsters[0].concat(1));
+    preset.apply(this, monsters[1].concat(2));
+
+
 });

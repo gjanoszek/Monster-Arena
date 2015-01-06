@@ -14,82 +14,119 @@
 </head>
 <body>
 
+<div class="wrapper">
+    <header class="header">Monster Arena</header>
+    <article class="main">
 
-<h1 id="title">Welcome to Monster Battle</h1>
-<div class="gracz" id="gracz1">
-    <h3>Player 1</h3>
-    <h4>Name</h4>
-    <p>
-        <input id="name1" class="userdata" type="text" placeholder="Name"/>
-    </p>
-    <h4>HP</h4>
-    <p>
-        <input id="hp1" class="userdata" type="text" placeholder="HP"/>
-    </p>
-    <h4>Max damage</h4>
-    <p>
-        <input id="maxDamage1" class="userdata" type="text" placeholder="Max damage"/>
-    </p>
-    <h4>Min damage</h4>
-    <p>
-        <input id="minDamage1" class="userdata" type="text" placeholder="Min damage"/>
-    </p>
-    <h4>Critic Chance Multiplier (smaller = bigger chance for critic) - Default: 1</h4>
-    <p>
-        <input id="criticMultiplier1" class="userdata" type="text" placeholder="Critic Chance Multiplier (defalut - 1)"/>
-    </p>
-    <h4>Miss chance multiplier (bigger = smaller chance for miss) - Default: 10</h4>
-    <p>
-        <input id="missMultiplier1" class="userdata" type="text" placeholder="Miss chance multiplier (default - 10)"/>
-    </p>
-    <textarea id="log1" class="console" name="log" cols="40" rows="20"></textarea>
-</div>
+        <div class="vs">VS</div>
 
-<div class="buttons">
-<button id="beginBattle">Begin battle</button>
-<button id="reset">RESET</button>
-<button id="clear">Clear</button>
-</div>
+        <button type="button" class="btn btn-success" id="beginBattle">Begin battle</button>
 
-<div class="presets">
-    <h3>Presets</h3>
-    <p>You can select already predefined mosters presets here (choose player first)</p>
-    <button id="btnplayer1">Player 1</button>
-    <button id="btnplayer2">Player 2</button>
-    <p>Select preset here</p>
-    <button id="skeleton">Skeleton</button>
-    <button id="ghost">Ghost</button>
-    <button id="warrior">Warrior</button>
-    <button id="troll">Troll</button>
-</div>
+    </article>
+    <aside class="aside aside-1">
+        <div class="gracz" id="gracz1">
+            <div>Player 1</div>
 
-<div class="gracz" id="gracz2">
-    <h3>Player 2</h3>
-    <h4>Name</h4>
-    <p>
-        <input id="name2" class="userdata" type="text" placeholder="Name"/>
-    </p>
-    <h4>HP</h4>
-    <p>
-        <input id="hp2" class="userdata" type="text" placeholder="HP"/>
-    </p>
-    <h4>Max damage</h4>
-    <p>
-        <input id="maxDamage2" class="userdata" type="text" placeholder="Max damage"/>
-    </p>
-    <h4>Min damage</h4>
-    <p>
-        <input id="minDamage2" class="userdata" type="text" placeholder="Min damage"/>
-    </p>
-    <h4>Critic Chance Multiplier (smaller = bigger chance for critic) - Default: 1</h4>
-    <p>
-        <input id="criticMultiplier2" class="userdata" type="text" placeholder="Critic Chance Multiplier (defalut - 1)"/>
-    </p>
-    <h4>Miss chance multiplier (bigger = smaller chance for miss) - Default: 10</h4>
-    <p>
-        <input id="missMultiplier2" class="userdata" type="text" placeholder="Miss chance multiplier (default - 10)"/>
-    </p>
-    <textarea id="log2" class="console" name="log" cols="40" rows="20"></textarea>
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="input-group">
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Presets <span class="caret"></span></button>
+                            <ul class="dropdown-menu monsters" role="menu">
+                                <li data-monsterId="0" data-playerId="1">Skeleton</li>
+                                <li data-monsterId="1" data-playerId="1">Ghost</li>
+                                <li data-monsterId="2" data-playerId="1">Warrior</li>
+                                <li data-monsterId="3" data-playerId="1">Troll</li>
+                            </ul>
+                        </div><!-- /btn-group -->
+                        <input id="name1" type="text" class="form-control" placeholder="Name">
+                    </div><!-- /input-group -->
+                </div><!-- /.col-lg-2 -->
+            </div><!-- /.row -->
+
+            <div>HP</div>
+
+            <div>
+                <input id="hp1" class="userdata" type="number" placeholder="HP"/>
+            </div>
+            <div>Max damage</div>
+
+            <div>
+                <input id="maxDamage1" class="userdata" type="number" placeholder="Max damage"/>
+            </div>
+            <div>Min damage</div>
+
+            <div>
+                <input id="minDamage1" class="userdata" type="number" placeholder="Min damage"/>
+            </div>
+            <div>Critic Chance Multiplier (smaller = bigger chance for critic) - Default: 1</div>
+
+            <div>
+                <input id="criticMultiplier1" class="userdata" type="number"
+                       placeholder="Critic Chance Multiplier (defalut - 1)"/>
+            </div>
+            <div>Miss chance multiplier (bigger = smaller chance for miss) - Default: 10</div>
+
+            <div>
+                <input id="missMultiplier1" class="userdata" type="number"
+                       placeholder="Miss chance multiplier (default - 10)"/>
+            </div>
+            <textarea id="log1" class="console" name="log" cols="40" rows="20"></textarea>
+        </div>
+    </aside>
+
+    <aside class="aside aside-2">
+        <div class="gracz" id="gracz2">
+            <div>Player 2</div>
+
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="input-group">
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Presets <span class="caret"></span></button>
+                            <ul class="dropdown-menu monsters" role="menu">
+                                <li data-monsterid="0" data-playerid="2">Skeleton</li>
+                                <li data-monsterid="1" data-playerid="2">Ghost</li>
+                                <li data-monsterid="2" data-playerid="2">Warrior</li>
+                                <li data-monsterid="3" data-playerid="2">Troll</li>
+                            </ul>
+                        </div><!-- /btn-group -->
+                        <input id="name2" type="text" class="form-control" placeholder="Name">
+                    </div><!-- /input-group -->
+                </div><!-- /.col-lg-2 -->
+            </div><!-- /.row -->
+            <div>HP</div>
+
+            <div>
+                <input id="hp2" class="userdata" type="number" placeholder="HP"/>
+            </div>
+            <div>Max damage</div>
+
+            <div>
+                <input id="maxDamage2" class="userdata" type="number" placeholder="Max damage"/>
+            </div>
+            <div>Min damage</div>
+
+            <div>
+                <input id="minDamage2" class="userdata" type="number" placeholder="Min damage"/>
+            </div>
+            <div>Critic Chance Multiplier (smaller = bigger chance for critic) - Default: 1</div>
+
+            <div>
+                <input id="criticMultiplier2" class="userdata" type="number"
+                       placeholder="Critic Chance Multiplier (defalut - 1)"/>
+            </div>
+            <div>Miss chance multiplier (bigger = smaller chance for miss) - Default: 10</div>
+
+            <div>
+                <input id="missMultiplier2" class="userdata" type="number"
+                       placeholder="Miss chance multiplier (default - 10)"/>
+            </div>
+            <textarea id="log2" class="console" name="log" cols="40" rows="20"></textarea>
+        </div>
+    </aside>
+
+    <footer class="footer"></footer>
 </div>
 
 </body>
