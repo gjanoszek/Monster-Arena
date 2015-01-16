@@ -22,6 +22,9 @@
 
         <button type="button" class="btn btn-success" id="beginBattle">Begin battle</button>
 
+        <ul id="shared_battle_log" class="list-group"></ul>
+
+
     </article>
     <aside class="aside aside-1">
         <div class="gracz" id="gracz1">
@@ -71,8 +74,10 @@
                 <input id="missMultiplier1" class="userdata" type="number"
                        placeholder="Miss chance multiplier (default - 10)"/>
             </div>
-            <textarea id="log1" class="console" name="log" cols="40" rows="20"></textarea>
         </div>
+
+        <div id="battleStatusPlayer1" class="battleStatus player1"></div>
+
     </aside>
 
     <aside class="aside aside-2">
@@ -122,8 +127,10 @@
                 <input id="missMultiplier2" class="userdata" type="number"
                        placeholder="Miss chance multiplier (default - 10)"/>
             </div>
-            <textarea id="log2" class="console" name="log" cols="40" rows="20"></textarea>
         </div>
+
+        <div id="battleStatusPlayer2" class="battleStatus"></div>
+
     </aside>
 
     <footer class="footer"></footer>

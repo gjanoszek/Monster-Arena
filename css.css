@@ -59,7 +59,21 @@ input, select, textarea {
     font-size: 3em;
 }
 
+#shared_battle_log {
+    color: black;
+    background-color: #00b3ee;
+}
 
+#shared_battle_log .critic {
+    background-color: tomato;
+}
 
+#shared_battle_log .miss {
+    background-color: lightblue;
+}
 
+.battleStatus {
+    font-size: 25px;
+    color: darkorange;
+}
 
