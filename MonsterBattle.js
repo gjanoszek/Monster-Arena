@@ -144,11 +144,11 @@ var fight = function () {
         //raport(monster1, m1DaneUderzenia, 1);
 
         raport({
-            monster: monster2,
-            daneUderzenia: m2DaneUderzenia
-       }, {
             monster: monster1,
             daneUderzenia: m1DaneUderzenia
+       }, {
+            monster: monster2,
+            daneUderzenia: m2DaneUderzenia
         }, round);
 
     }
