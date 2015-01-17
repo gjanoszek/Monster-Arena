@@ -20,8 +20,11 @@ input, select, textarea {
 
 .wrapper {
     display: flex;
+    display: -webkit-flex;
     flex-flow: row wrap;
+    -webkit-flex-flow: row wrap;
     justify-content: center;
+    -webkit-justify-content: center;
     text-align: center;
 }
 
@@ -32,26 +35,45 @@ input, select, textarea {
 .header {
     background: tomato;
     flex: 1 100%;
+    -webkit-flex: 1 100%;
 }
 
 .footer {
     order: 4;
+    -webkit-order: 4;
     flex: 1 100%;
+    -webkit-flex: 1 100%;
 }
 
 .main {
     order: 2;
+    -webkit-order: 2;
     flex: 1;
+    -webkit-flex: 1;
+}
+
+.row {
+    display: flex;
+    display: -webkit-flex;
+}
+
+.row .col-lg-2 {
+    flex-grow: 2;
+    -webkit-flex-grow: 2;
 }
 
 .aside-1 {
     order: 1;
+    -webkit-order: 1;
     flex: 3;
+    -webkit-flex: 3;
 }
 
 .aside-2 {
     order: 3;
+    -webkit-order: 3;
     flex: 3;
+    -webkit-flex: 3;
 }
 
 
