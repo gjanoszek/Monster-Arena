@@ -9,6 +9,7 @@ var Monster = function (opts) {
         this.minDmg = opts.minDmg;
         this.critMult = opts.critMult;
         this.missMult = opts.missMult;
+        this.maxHp = opts.maxHp;
     },
     monster1,
     monster2,
@@ -19,7 +20,8 @@ var Monster = function (opts) {
             maxDmg: parseInt($("#maxDamage" + monsterNum).val(), 10),
             minDmg: parseInt($("#minDamage" + monsterNum).val(), 10),
             missMult: parseFloat($("#missMultiplier" + monsterNum).val()),
-            critMult: parseFloat($("#criticMultiplier" + monsterNum).val())
+            critMult: parseFloat($("#criticMultiplier" + monsterNum).val()),
+            maxHp: parseInt($("#hp" + monsterNum).val(), 10)
         };
     },
     $log,
@@ -72,8 +74,18 @@ Monster.prototype.uderz = function (monsterNum) {
 
 var raport = function(monster1FightData, monster2FightData, round) {
     var $log = $('#shared_battle_log'),
-        template = ['<li class="list-group-item">', '<span class="badge player1">14</span>', '<span class="badge player2">14</span>Round <span class="roundNo">1</span>', '</li>'].join(''),
-        $template = $(template);
+        template = ['<li class="list-group-item">', '<div class="outer">', '<div class="inner player1HPBar">', '<div></div>', '</div>', '</div>', '<span class="player1Hp"></span>', '<span class="badge player1">14</span>', '<span class="badge player2">14</span>Round <span class="roundNo">1</span>','<div class="outer">', '<div class="inner player2HPBar">', '<div></div>', '</div>', '</div>','<span class="player2Hp"></span>', '</li>'].join(''),
+        $template = $(template),
+        stats = {
+            monster1: {
+                criticCount: 0,
+                damage: []
+            },
+            monster2: {
+                criticCount: 0,
+                damage: []
+            }
+        };
 
 
 
@@ -81,19 +93,32 @@ var raport = function(monster1FightData, monster2FightData, round) {
 
     if (monster1FightData.daneUderzenia.isCritic) {
         $('.player1', $template).addClass('critic').text(monster1FightData.daneUderzenia.uderzenie);
+        stats.monster1.criticCount += 1;
     } else if (monster1FightData.daneUderzenia.uderzenie === 0) {
         $('.player1', $template).addClass('miss').text(0);
     } else {
         $('.player1', $template).text(monster1FightData.daneUderzenia.uderzenie);
     }
 
+    stats.monster1.damage.push(monster1FightData.daneUderzenia.uderzenie);
+
     if (monster2FightData.daneUderzenia.isCritic) {
         $('.player2', $template).addClass('critic').text(monster2FightData.daneUderzenia.uderzenie);
+        stats.monster2.criticCount += 1;
     } else if (monster2FightData.daneUderzenia.uderzenie === 0) {
         $('.player2', $template).addClass('miss').text(0);
     } else {
         $('.player2', $template).text(monster2FightData.daneUderzenia.uderzenie);
     }
+
+    stats.monster2.damage.push(monster2FightData.daneUderzenia.uderzenie);
+
+
+    $('.player1HPBar', $template).css('height', monster1FightData.monster.hp * 100 / monster1FightData.monster.maxHp + '%');
+    $('.player2HPBar', $template).css('height', monster2FightData.monster.hp * 100 / monster2FightData.monster.maxHp + '%');
+
+    $('.player1Hp', $template).text(monster1FightData.monster.hp + "HP");
+    $('.player2Hp', $template).text(monster2FightData.monster.hp + "HP");
 
     $log.append($template);
 
@@ -119,11 +144,11 @@ var fight = function () {
         //raport(monster1, m1DaneUderzenia, 1);
 
         raport({
-            player: monster2,
-            daneUderzenia: m2DaneUderzenia
-        }, {
-            player: monster1,
+            monster: monster1,
             daneUderzenia: m1DaneUderzenia
+       }, {
+            monster: monster2,
+            daneUderzenia: m2DaneUderzenia
         }, round);
 
     }
@@ -149,7 +174,7 @@ $(document).ready(function ($) {
         monsters = [
             ['Skeleton', 80, 9, 1, 1.4, 15],
             ['Ghost', 75, 8, 3, 1, 10],
-            ['Warrior', 120, 4, 3, 1, 10],
+            ['Warrior', 120, 5, 2, 1.1, 10],
             ['Troll', 90, 5, 4, 0.6, 7]
         ];
 
