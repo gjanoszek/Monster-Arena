@@ -72,9 +72,9 @@ Monster.prototype.uderz = function (monsterNum) {
 
 };
 
-var raport = function(monster1FightData, monster2FightData, round) {
+var raport = function (monster1FightData, monster2FightData, round) {
     var $log = $('#shared_battle_log'),
-        template = ['<li class="list-group-item">', '<div class="outer">', '<div class="inner player1HPBar">', '<div></div>', '</div>', '</div>', '<span class="player1Hp"></span>', '<span class="badge player1">14</span>', '<span class="badge player2">14</span>Round <span class="roundNo">1</span>','<div class="outer">', '<div class="inner player2HPBar">', '<div></div>', '</div>', '</div>','<span class="player2Hp"></span>', '</li>'].join(''),
+        template = ['<li class="list-group-item">', '<div class="outer">', '<div class="inner player1HPBar">', '<div></div>', '</div>', '</div>', '<span class="player1Hp"></span>', '<span class="badge player1">14</span>', '<span class="badge player2">14</span>Round <span class="roundNo">1</span>', '<div class="outer">', '<div class="inner player2HPBar">', '<div></div>', '</div>', '</div>', '<span class="player2Hp"></span>', '</li>'].join(''),
         $template = $(template),
         stats = {
             monster1: {
@@ -85,43 +85,33 @@ var raport = function(monster1FightData, monster2FightData, round) {
                 criticCount: 0,
                 damage: []
             }
+        },
+        raporting = function (monsterFightData, playerNo) {
+            var playerClass = '.player' + playerNo,
+                monsterStats = stats['monster' + playerNo],
+                monster = monsterFightData.monster,
+                daneUderzenia = monsterFightData.daneUderzenia;
+
+            if (daneUderzenia.isCritic) {
+                $(playerClass, $template).addClass('critic').text(daneUderzenia.uderzenie);
+                monsterStats.criticCount += 1;
+            } else if (daneUderzenia.uderzenie === 0) {
+                $(playerClass, $template).addClass('miss').text(0);
+            } else {
+                $(playerClass, $template).text(daneUderzenia.uderzenie);
+            }
+
+            monsterStats.damage.push(daneUderzenia.uderzenie);
+            $(playerClass + 'HPBar', $template).css('height', monster.hp * 100 / monster.maxHp + '%');
+            $(playerClass + 'Hp', $template).text(monster.hp + "HP");
         };
-
-
 
     $('.roundNo', $template).text(round);
 
-    if (monster1FightData.daneUderzenia.isCritic) {
-        $('.player1', $template).addClass('critic').text(monster1FightData.daneUderzenia.uderzenie);
-        stats.monster1.criticCount += 1;
-    } else if (monster1FightData.daneUderzenia.uderzenie === 0) {
-        $('.player1', $template).addClass('miss').text(0);
-    } else {
-        $('.player1', $template).text(monster1FightData.daneUderzenia.uderzenie);
-    }
-
-    stats.monster1.damage.push(monster1FightData.daneUderzenia.uderzenie);
-
-    if (monster2FightData.daneUderzenia.isCritic) {
-        $('.player2', $template).addClass('critic').text(monster2FightData.daneUderzenia.uderzenie);
-        stats.monster2.criticCount += 1;
-    } else if (monster2FightData.daneUderzenia.uderzenie === 0) {
-        $('.player2', $template).addClass('miss').text(0);
-    } else {
-        $('.player2', $template).text(monster2FightData.daneUderzenia.uderzenie);
-    }
-
-    stats.monster2.damage.push(monster2FightData.daneUderzenia.uderzenie);
-
-
-    $('.player1HPBar', $template).css('height', monster1FightData.monster.hp * 100 / monster1FightData.monster.maxHp + '%');
-    $('.player2HPBar', $template).css('height', monster2FightData.monster.hp * 100 / monster2FightData.monster.maxHp + '%');
-
-    $('.player1Hp', $template).text(monster1FightData.monster.hp + "HP");
-    $('.player2Hp', $template).text(monster2FightData.monster.hp + "HP");
+    raporting(monster1FightData, 1);
+    raporting(monster2FightData, 2);
 
     $log.append($template);
-
 
 };
 
@@ -140,16 +130,16 @@ var fight = function () {
         monster1.hp -= m2DaneUderzenia.uderzenie;
         //raport(monster2, m2DaneUderzenia, 2);
 
-        monster2.hp -= m1DaneUderzenia.uderzenie;
-        //raport(monster1, m1DaneUderzenia, 1);
-
         raport({
             monster: monster1,
             daneUderzenia: m1DaneUderzenia
-       }, {
+        }, {
             monster: monster2,
             daneUderzenia: m2DaneUderzenia
         }, round);
+
+        monster2.hp -= m1DaneUderzenia.uderzenie;
+        //raport(monster1, m1DaneUderzenia, 1);
 
     }
 
@@ -209,7 +199,7 @@ $(document).ready(function ($) {
     };
 
 
-    $('.monsters li').click(function() {
+    $('.monsters li').click(function () {
         var data = $(this).data(),
             monsterId = parseInt(data.monsterid, 10),
             playerId = parseInt(data.playerid, 10),
