@@ -74,7 +74,7 @@ Monster.prototype.uderz = function (monsterNum) {
 
 var raport = function (monster1FightData, monster2FightData, round) {
     var $log = $('#shared_battle_log'),
-        template = ['<li class="list-group-item">', '<div class="outer">', '<div class="inner player1HPBar">', '<div></div>', '</div>', '</div>', '<span class="player1Hp"></span>', '<span class="badge player1">14</span>', '<span class="badge player2">14</span>Round <span class="roundNo">1</span>', '<div class="outer">', '<div class="inner player2HPBar">', '<div></div>', '</div>', '</div>', '<span class="player2Hp"></span>', '</li>'].join(''),
+        template = ['<div class="logLine"> <li class="list-group-item">', '<div class="outer p1">', '<div class="inner player1HPBar">', '</div>', '</div>', '<span class="player1Hp"></span>', '<span class="badge player1">14</span>', '<span class="badge player2">14</span> <div class="round"> Round <span class="roundNo">1</span> </div>', '<div class="outer p2">', '<div class="inner player2HPBar">', '<div></div>', '</div>', '</div>', '<span class="player2Hp"></span>', '</li> </div>'].join(''),
         $template = $(template),
         stats = {
             monster1: {
@@ -106,7 +106,7 @@ var raport = function (monster1FightData, monster2FightData, round) {
             $(playerClass + 'Hp', $template).text(monster.hp + "HP");
         };
 
-    $('.roundNo', $template).text(round);
+    $('.roundNo', $template).text(' ' + round);
 
     raporting(monster1FightData, 1);
     raporting(monster2FightData, 2);
@@ -214,3 +214,6 @@ $(document).ready(function ($) {
 
 
 });
+
+
+// skopana kolejność uderzeń w logu
