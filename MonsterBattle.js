@@ -128,7 +128,7 @@ var fight = function () {
         m1DaneUderzenia = monster1.uderz(1);
 
         monster1.hp -= m2DaneUderzenia.uderzenie;
-        //raport(monster2, m2DaneUderzenia, 2);
+        monster2.hp -= m1DaneUderzenia.uderzenie;
 
         raport({
             monster: monster1,
@@ -137,10 +137,6 @@ var fight = function () {
             monster: monster2,
             daneUderzenia: m2DaneUderzenia
         }, round);
-
-        monster2.hp -= m1DaneUderzenia.uderzenie;
-        //raport(monster1, m1DaneUderzenia, 1);
-
     }
 
     // analiza walki:
@@ -215,5 +211,3 @@ $(document).ready(function ($) {
 
 });
 
-
-// skopana kolejność uderzeń w logu
