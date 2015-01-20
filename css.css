@@ -20,8 +20,11 @@ input, select, textarea {
 
 .wrapper {
     display: flex;
+    display: -webkit-flex;
     flex-flow: row wrap;
+    -webkit-flex-flow: row wrap;
     justify-content: center;
+    -webkit-justify-content: center;
     text-align: center;
 }
 
@@ -32,26 +35,64 @@ input, select, textarea {
 .header {
     background: tomato;
     flex: 1 100%;
+    -webkit-flex: 1 100%;
 }
 
 .footer {
     order: 4;
+    -webkit-order: 4;
     flex: 1 100%;
+    -webkit-flex: 1 100%;
 }
 
 .main {
     order: 2;
+    -webkit-order: 2;
+    flex: 2;
+    -webkit-flex: 2;
+}
+
+.gracz .row {
+    display: flex;
+    display: -webkit-flex;
+}
+
+.monster-name .input-group {
+    display: -webkit-inline-flex;
+    display: inline-flex;
+}
+
+.monster-name .input-group-btn {
     flex: 1;
+    -webkit-flex: 1;
+}
+
+#name1, #name2 {
+    flex: 2;
+    -webkit-flex: 2;
+}
+
+.input-group-addon, .input-group-btn, .input-group .form-control {
+    display: inline-block;
+}
+
+.row .col-lg-2 {
+    flex-grow: 2;
+    -webkit-flex-grow: 2;
 }
 
 .aside-1 {
     order: 1;
+    -webkit-order: 1;
     flex: 3;
+    -webkit-flex: 3;
 }
 
 .aside-2 {
     order: 3;
+    -webkit-order: 3;
     flex: 3;
+    -webkit-flex: 3;
 }
 
 
@@ -60,8 +101,64 @@ input, select, textarea {
 }
 
 #shared_battle_log {
+    position: relative;
+    padding-top: 20px;
     color: black;
-    background-color: #00b3ee;
+}
+
+#shared_battle_log .badge {
+    float: none;
+}
+
+#shared_battle_log div, span {
+    display: -webkit-inline-flex;
+    display: inline-flex;
+}
+
+#shared_battle_log .player1 {
+    float: left;
+    position: relative;
+    top: 12px;
+    right: 5px;
+}
+
+#shared_battle_log .player1HPBar {
+    -webkit-order: 2;
+    order: 2;
+    padding-left: 10px;
+}
+
+#shared_battle_log .player1Hp {
+    -webkit-order: 3;
+    order: 3;
+    padding-left: 5px;
+}
+
+#shared_battle_log .round {
+    position: relative;
+    bottom: 8px;
+    padding-right: 17px;
+    padding-left: 10px;
+    font-size: 20px;
+}
+
+#shared_battle_log .player2Hp {
+    -webkit-order: 4;
+    order: 4;
+    position: relative;
+    right: 5px;
+}
+
+#shared_battle_log .p2, .player2HPBar {
+    float: right;
+    position: relative;
+}
+
+#shared_battle_log .player2 {
+    float: right;
+    position: relative;
+    top: 12px;
+    left: 5px;
 }
 
 #shared_battle_log .critic {
@@ -76,4 +173,43 @@ input, select, textarea {
     font-size: 25px;
     color: darkorange;
 }
+
+
+
+.outer {
+    width: 15px;
+    height: 40px;
+    border: 2px solid #ccc;
+    overflow: hidden;
+
+    position: relative;
+    background-color: rgb(60,	60,	60);
+
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.inner, .inner div {
+    width: 100%;
+    overflow: hidden;
+    position: absolute;
+}
+
+.inner {
+    background-color: green;
+    bottom: 0;
+    height: 0;
+}
+
+.inner div {
+    /*border: 2px solid orange;*/
+    border-bottom-width: 0;
+    background-color: orange;
+
+    top: 0;
+    width: 100%;
+    /*height: 5px;*/
+}
+
 
