@@ -115,7 +115,7 @@ input, select, textarea {
     display: inline-flex;
 }
 
-#shared_battle_log .player1 {
+#shared_battle_log .player2 {
     float: left;
     position: relative;
     top: 12px;
@@ -154,7 +154,7 @@ input, select, textarea {
     position: relative;
 }
 
-#shared_battle_log .player2 {
+#shared_battle_log .player1 {
     float: right;
     position: relative;
     top: 12px;
