@@ -7,8 +7,8 @@ var Monster = function (opts) {
         this.hp = opts.hp;
         this.maxDmg = opts.maxDmg;
         this.minDmg = opts.minDmg;
-        this.critMult = opts.critMult;
-        this.missMult = opts.missMult;
+        this.critChance = opts.critChance;
+        this.missChance = opts.missChance;
         this.maxHp = opts.maxHp;
     },
     monster1,
@@ -19,8 +19,8 @@ var Monster = function (opts) {
             hp: parseInt($("#hp" + monsterNum).val(), 10),
             maxDmg: parseInt($("#maxDamage" + monsterNum).val(), 10),
             minDmg: parseInt($("#minDamage" + monsterNum).val(), 10),
-            missMult: parseFloat($("#missMultiplier" + monsterNum).val()),
-            critMult: parseFloat($("#criticMultiplier" + monsterNum).val()),
+            missChance: parseFloat($("#missChance" + monsterNum).val()),
+            critChance: parseFloat($("#criticChance" + monsterNum).val()),
             maxHp: parseInt($("#hp" + monsterNum).val(), 10)
         };
     },
@@ -37,15 +37,15 @@ Monster.prototype.przedstawSie = function () {
 
 Monster.prototype.uderz = function (monsterNum) {
     var attackingMonster = window['monster' + monsterNum],
-        critic = Math.random() * attackingMonster.critMult,
-        missChance = Math.floor(Math.random() * attackingMonster.missMult);
+        critic = Math.floor(Math.random() * 100 + 1),
+        missChance = Math.floor(Math.random() * 100 + 1);
 
-    isCritic = critic <= 0.14;
+    isCritic = critic <= attackingMonster.critChance;
 
-    if (missChance >= 2) {
-        isAccurate = true;
-    } else {
+    if (missChance <= attackingMonster.missChance) {
         isAccurate = false;
+    } else {
+        isAccurate = true;
     }
 
     if (isAccurate === true) {
@@ -158,10 +158,10 @@ $(document).ready(function ($) {
     var beginBattle = $("#beginBattle"),
         userdata = $(".userdata"),
         monsters = [
-            ['Skeleton', 80, 9, 1, 1.4, 15],
-            ['Ghost', 75, 8, 3, 1, 10],
-            ['Warrior', 120, 5, 2, 1.1, 10],
-            ['Troll', 90, 5, 4, 0.6, 7]
+            ['Skeleton', 80, 9, 2, 22, 23],
+            ['Ghost', 75, 8, 3, 25, 20],
+            ['Warrior', 120, 5, 2, 23, 20],
+            ['Troll', 90, 5, 4, 32, 25]
         ];
 
     $log = $('#shared_battle_log');
@@ -185,13 +185,13 @@ $(document).ready(function ($) {
     });
 
 
-    preset = function (name, hp, maxDmg, minDmg, critMult, missMult, playerNum) {
+    preset = function (name, hp, maxDmg, minDmg, critChance, missChance, playerNum) {
         $('#name' + playerNum).val(name);
         $('#hp' + playerNum).val(hp);
         $('#maxDamage' + playerNum).val(maxDmg);
         $('#minDamage' + playerNum).val(minDmg);
-        $('#criticMultiplier' + playerNum).val(critMult);
-        $('#missMultiplier' + playerNum).val(missMult);
+        $('#criticChance' + playerNum).val(critChance);
+        $('#missChance' + playerNum).val(missChance);
     };
 
 
