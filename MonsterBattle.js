@@ -49,7 +49,7 @@ Monster.prototype.uderz = function (monsterNum) {
     }
 
     if (isAccurate === true) {
-        uderzenie = Math.floor(Math.random() * (this.maxDmg - this.minDmg)) + this.minDmg;
+        uderzenie = Math.floor(Math.random() * (this.maxDmg + 1 - this.minDmg)) + this.minDmg;
         if (isCritic) {
             uderzenie *= 3;
             console.log(window['monster' + monsterNum].przedstawSie() + ' zadaje obrażenia krytyczne.');
