@@ -5,23 +5,186 @@
 var Monster = function (opts) {
         this.nazwa = opts.nazwa;
         this.hp = opts.hp;
+        this.armor = opts.armor;
         this.maxDmg = opts.maxDmg;
         this.minDmg = opts.minDmg;
         this.critChance = opts.critChance;
         this.missChance = opts.missChance;
         this.maxHp = opts.maxHp;
+        this.level = opts.level || 1;
+        this.xp = opts.xp || 0;
+        this.class = opts.class;
+        this.abilities = opts.abilities || [abilities[0], classes[this.class].abilities[0]];
+    },
+    abilities = [{
+        name: 'Fire Arrow',
+        cooldown: 2,
+        cooldown_left: 0,
+        use: function (monster1, monster2, daneUderzeniaAtk, daneUderzeniaDef) {
+            // analiza i interpretacja
+            daneUderzeniaAtk.uderzenie += 5;
+
+            return daneUderzenia;
+        }
+    }, {
+        name: 'Sacrifice',
+        cooldown: 2,
+        cooldown_left: 0,
+        use: function (monster1, monster2, daneUderzeniaAtk, daneUderzeniaDef) {
+            // analiza i interpretacja
+            monster1.hp *= 0.9;
+            daneUderzeniaAtk.uderzenie *= 2;
+
+            return daneUderzenia;
+        }
+    }, {
+        name: 'Blizzard',
+        cooldown: 3,
+        cooldown_left: 0,
+        use: function (monster1, monster2, daneUderzeniaAtk, daneUderzeniaDef) {
+            // analiza i interpretacja
+            daneUderzeniaAtk.uderzenie *= 1.5;
+            daneUderzeniaDef.uderzenie *= 0.5;
+
+            return daneUderzenia;
+        }
+    }, {
+        name: 'Fury',
+        cooldown: 2,
+        cooldown_left: 0,
+        use: function (monster1, monster2, daneUderzeniaAtk, daneUderzeniaDef) {
+            // analiza i interpretacja
+            daneUderzeniaAtk.uderzenie *= 3;
+            daneUderzeniaDef.uderzenie *= 1.5;
+
+            return daneUderzenia;
+        }
+    }],
+    classes = {
+        'Death Knight': {
+            abilities: [{
+                name: 'Wrath of Death',
+                cooldown: 2,
+                cooldown_left: 0,
+                use: function (attackingMonster, defendingMonster, daneUderzeniaAtk, daneUderzeniaDef) {
+                    // analiza i interpretacja
+                    stolenHp = defendingMonster.hp*0.15;
+                    defendingMonster.hp -= stolenHp;
+                    attackingMonster.hp += stolenHp;
+                    
+                    return daneUderzenia;
+                }
+            }, {
+                name: 'Curse',
+                cooldown: 2,
+                cooldown_left: 0,
+                use: function (monster1, monster2, daneUderzeniaAtk, daneUderzeniaDef) {
+                    // analiza i interpretacja
+                    defendingMonster.hp -= defendingMonster.hp*0.1;
+                    daneUderzeniaDef.uderzenie -= daneUderzeniaDef.uderzenie*0.2;
+                    
+                    return daneUderzenia;
+                }
+            }]
+        },
+        Assasin: {
+            abilities: [{
+                name: 'Backstab',
+                cooldown: 2,
+                cooldown_left: 0,
+                use: function (monster1, monster2, daneUderzeniaAtk, daneUderzeniaDef) {
+                    // analiza i interpretacja
+                    isAccurate = true;
+                    isCritic = true;
+
+                    return daneUderzenia;
+                }
+            }, {
+                name: 'Stealth',
+                cooldown: 2,
+                cooldown_left: 0,
+                use: function (monster1, monster2, daneUderzeniaAtk, daneUderzeniaDef) {
+                    // analiza i interpretacja
+                    daneUderzeniaDef.uderzenie = 0;
+                    daneUderzeniaAtk.uderzenie *= 1.5;
+
+                    return daneUderzenia;
+                }
+            }]
+        },
+        Priest: {
+            abilities: [{
+                name: 'Heal',
+                cooldown: 2,
+                cooldown_left: 0,
+                use: function (monster1, monster2, daneUderzeniaAtk, daneUderzeniaDef) {
+                    // analiza i interpretacja
+                    monster1.hp += monster1.hp*0.25;
+
+                    return daneUderzenia;
+                }
+            }, {
+                name: 'Burst of Mana',
+                cooldown: 2,
+                cooldown_left: 0,
+                use: function (monster1, monster2, daneUderzeniaAtk, daneUderzeniaDef) {
+                    // analiza i interpretacja
+                    daneUderzeniaAtk.uderzenie = monster1.maxDmg*2;
+
+                    return daneUderzenia;
+                }
+            }]
+        },
+        Paladin: {
+            abilities: [{
+                name: 'Divine Shield',
+                cooldown: 2,
+                cooldown_left: 0,
+                use: function (monster1, monster2, daneUderzeniaAtk, daneUderzeniaDef) {
+                    // analiza i interpretacja
+                    transferredDmg = daneUderzeniaDef.uderzenie * 0.9;
+                    monster1.hp += transferredDmg;
+
+                    return daneUderzenia;
+                }
+            }, {
+                name: 'Hammer of Glory',
+                cooldown: 2,
+                cooldown_left: 0,
+                use: function (monster1, monster2, daneUderzeniaAtk, daneUderzeniaDef) {
+                    // analiza i interpretacja
+                    daneUderzeniaAtk.uderzenie *= 1.5;
+                    monster1.hp += daneUderzeniaAtk.uderzenie;
+
+                    return daneUderzenia;
+                }
+            }]
+        }
     },
     monster1,
     monster2,
+    calculateNextLevelXP = function(currentLvl) {
+        var nextLevel = 400;
+
+        if (currentLvl > 1) {
+            for (var i = 2; i <= currentLvl; i++) {
+                nextLevel += Math.floor(nextLevel * 0.2);
+            }
+        }
+
+        return nextLevel;
+    },
     getMonsterInitData = function (monsterNum) {
         return {
             nazwa: $("#name" + monsterNum).val(),
             hp: parseInt($("#hp" + monsterNum).val(), 10),
+            armor: parseInt($("#armor" + monsterNum).val(), 10),
             maxDmg: parseInt($("#maxDamage" + monsterNum).val(), 10),
             minDmg: parseInt($("#minDamage" + monsterNum).val(), 10),
             missChance: parseFloat($("#missChance" + monsterNum).val()),
             critChance: parseFloat($("#criticChance" + monsterNum).val()),
-            maxHp: parseInt($("#hp" + monsterNum).val(), 10)
+            maxHp: parseInt($("#hp" + monsterNum).val(), 10),
+            'class': $('#gracz' + monsterNum + ' [name="monsterClass"]').val()
         };
     },
     $log,
@@ -38,7 +201,16 @@ Monster.prototype.przedstawSie = function () {
 Monster.prototype.uderz = function (monsterNum) {
     var attackingMonster = window['monster' + monsterNum],
         critic = Math.floor(Math.random() * 100 + 1),
-        missChance = Math.floor(Math.random() * 100 + 1);
+        missChance = Math.floor(Math.random() * 100 + 1),
+        secondMonster;
+
+    if (monsterNum === 1) {
+        secondMonster = monster2
+    } else {
+        secondMonster = monster1
+    }
+
+
 
     isCritic = critic <= attackingMonster.critChance;
 
@@ -49,7 +221,7 @@ Monster.prototype.uderz = function (monsterNum) {
     }
 
     if (isAccurate === true) {
-        uderzenie = Math.floor(Math.random() * (this.maxDmg + 1 - this.minDmg)) + this.minDmg;
+        uderzenie = Math.floor(((Math.random() * (this.maxDmg + 1 - this.minDmg)) + this.minDmg) * (1 - (secondMonster.armor * 3 / 100)));
         if (isCritic) {
             uderzenie *= 3;
             console.log(window['monster' + monsterNum].przedstawSie() + ' zadaje obrażenia krytyczne.');
@@ -127,6 +299,15 @@ var fight = function () {
         m2DaneUderzenia = monster2.uderz(2);
         m1DaneUderzenia = monster1.uderz(1);
 
+        // TU TRZEBA SPRAWDZAC UZYTE ABILITIES, ktore modyfikuja m[1|2]DaneUderzenia
+        // na przyklad:
+        //
+
+
+        // sprawdzamy, ktore ability jest uzyte i jezeli jest to dzialamy:
+
+
+
         monster1.hp -= m2DaneUderzenia.uderzenie;
         monster2.hp -= m1DaneUderzenia.uderzenie;
 
@@ -158,10 +339,10 @@ $(document).ready(function ($) {
     var beginBattle = $("#beginBattle"),
         userdata = $(".userdata"),
         monsters = [
-            ['Skeleton', 80, 9, 2, 22, 23],
-            ['Ghost', 75, 8, 3, 25, 20],
-            ['Warrior', 120, 5, 2, 23, 20],
-            ['Troll', 90, 5, 4, 32, 25]
+            ['Skeleton', 80, 5, 9, 2, 22, 23, 'Assasin'],
+            ['Ghost', 75, 5, 8, 3, 25, 20, 'Death Knight'],
+            ['Warrior', 120, 5, 5, 2, 23, 20, 'Paladin'],
+            ['Troll', 90, 5, 5, 4, 32, 25, 'Priest']
         ];
 
     $log = $('#shared_battle_log');
@@ -185,13 +366,15 @@ $(document).ready(function ($) {
     });
 
 
-    preset = function (name, hp, maxDmg, minDmg, critChance, missChance, playerNum) {
+    preset = function (name, hp, armor, maxDmg, minDmg, critChance, missChance, playerClass, playerNum) {
         $('#name' + playerNum).val(name);
         $('#hp' + playerNum).val(hp);
+        $('#armor' + playerNum).val(armor);
         $('#maxDamage' + playerNum).val(maxDmg);
         $('#minDamage' + playerNum).val(minDmg);
         $('#criticChance' + playerNum).val(critChance);
         $('#missChance' + playerNum).val(missChance);
+        $('#gracz' + playerNum + ' [name="monsterClass"]').val(playerClass)
     };
 
 
