@@ -2,7 +2,11 @@
  * Created by wetcouch on 12.10.14.
  */
 
-var randomBetween = function(min, max) {
+var shuffle = function(o){
+        for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+        return o;
+    },
+    randomBetween = function(min, max) {
         return Math.floor(Math.random() * (max - min + 1) + min);
     },
     Monster = function (opts) {
@@ -294,6 +298,7 @@ var fight = function () {
                 selectedAbility = null,
                 i = 0,
                 l = monster.abilities.length;
+            shuffle(monster.abilities);
             for (i; i < l; i++) {
                 ability = monster.abilities[i];
                 if (ability.cooldown_left > 0) {
