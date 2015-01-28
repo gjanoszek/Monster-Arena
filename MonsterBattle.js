@@ -2,7 +2,10 @@
  * Created by wetcouch on 12.10.14.
  */
 
-var Monster = function (opts) {
+var randomBetween = function(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    },
+    Monster = function (opts) {
         this.nazwa = opts.nazwa;
         this.hp = opts.hp;
         this.armor = opts.armor;
@@ -14,50 +17,48 @@ var Monster = function (opts) {
         this.level = opts.level || 1;
         this.xp = opts.xp || 0;
         this.class = opts.class;
-        this.abilities = opts.abilities || [abilities[0], classes[this.class].abilities[0]];
+        this.abilities = opts.abilities || [$.extend(true, {}, abilities[randomBetween(0, abilities.length -1)]), $.extend(true, {}, classes[this.class].abilities[randomBetween(0, classes[this.class].abilities.length -1)])];
     },
     abilities = [{
         name: 'Fire Arrow',
         cooldown: 2,
         cooldown_left: 0,
-        use: function (monster1, monster2, daneUderzeniaAtk, daneUderzeniaDef) {
+        use: function (attackingMonster, defendingMonster, daneUderzeniaAtk, daneUderzeniaDef) {
             // analiza i interpretacja
             daneUderzeniaAtk.uderzenie += 5;
-
-            return daneUderzenia;
         }
     }, {
         name: 'Sacrifice',
         cooldown: 2,
         cooldown_left: 0,
-        use: function (monster1, monster2, daneUderzeniaAtk, daneUderzeniaDef) {
+        use: function (attackingMonster, defendingMonster, daneUderzeniaAtk, daneUderzeniaDef) {
             // analiza i interpretacja
-            monster1.hp *= 0.9;
-            daneUderzeniaAtk.uderzenie *= 2;
-
-            return daneUderzenia;
+            attackingMonster.hp *= 0.9;
+            attackingMonster.hp = Math.floor(attackingMonster.hp);
+            daneUderzeniaAtk.uderzenie *= 3.5;
+            daneUderzeniaAtk.uderzenie = Math.floor(daneUderzeniaAtk.uderzenie)
         }
     }, {
         name: 'Blizzard',
         cooldown: 3,
         cooldown_left: 0,
-        use: function (monster1, monster2, daneUderzeniaAtk, daneUderzeniaDef) {
+        use: function (attackingMonster, defendingMonster, daneUderzeniaAtk, daneUderzeniaDef) {
             // analiza i interpretacja
             daneUderzeniaAtk.uderzenie *= 1.5;
+            daneUderzeniaAtk.uderzenie = Math.floor(daneUderzeniaAtk.uderzenie);
             daneUderzeniaDef.uderzenie *= 0.5;
-
-            return daneUderzenia;
+            daneUderzeniaDef.uderzenie = Math.floor(daneUderzeniaDef.uderzenie)
         }
     }, {
         name: 'Fury',
         cooldown: 2,
         cooldown_left: 0,
-        use: function (monster1, monster2, daneUderzeniaAtk, daneUderzeniaDef) {
+        use: function (attackingMonster, defendingMonster, daneUderzeniaAtk, daneUderzeniaDef) {
             // analiza i interpretacja
-            daneUderzeniaAtk.uderzenie *= 3;
+            daneUderzeniaAtk.uderzenie *= 3.5;
+            daneUderzeniaAtk.uderzenie = Math.floor(daneUderzeniaAtk.uderzenie);
             daneUderzeniaDef.uderzenie *= 1.5;
-
-            return daneUderzenia;
+            daneUderzeniaDef.uderzenie = Math.floor(daneUderzeniaDef.uderzenie)
         }
     }],
     classes = {
@@ -70,20 +71,20 @@ var Monster = function (opts) {
                     // analiza i interpretacja
                     stolenHp = defendingMonster.hp*0.15;
                     defendingMonster.hp -= stolenHp;
+                    defendingMonster.hp = Math.floor(defendingMonster.hp);
                     attackingMonster.hp += stolenHp;
-                    
-                    return daneUderzenia;
+                    attackingMonster.hp = Math.floor(attackingMonster.hp)
                 }
             }, {
                 name: 'Curse',
                 cooldown: 2,
                 cooldown_left: 0,
-                use: function (monster1, monster2, daneUderzeniaAtk, daneUderzeniaDef) {
+                use: function (attackingMonster, defendingMonster, daneUderzeniaAtk, daneUderzeniaDef) {
                     // analiza i interpretacja
                     defendingMonster.hp -= defendingMonster.hp*0.1;
+                    defendingMonster.hp = Math.floor(defendingMonster.hp);
                     daneUderzeniaDef.uderzenie -= daneUderzeniaDef.uderzenie*0.2;
-                    
-                    return daneUderzenia;
+                    daneUderzeniaDef.uderzenie = Math.floor(daneUderzeniaDef.uderzenie)
                 }
             }]
         },
@@ -92,23 +93,21 @@ var Monster = function (opts) {
                 name: 'Backstab',
                 cooldown: 2,
                 cooldown_left: 0,
-                use: function (monster1, monster2, daneUderzeniaAtk, daneUderzeniaDef) {
+                use: function (attackingMonster, defendingMonster, daneUderzeniaAtk, daneUderzeniaDef) {
                     // analiza i interpretacja
-                    isAccurate = true;
-                    isCritic = true;
+                    daneUderzeniaAtk.uderzenie = Math.floor(((Math.random() * (attackingMonster.maxDmg + 1 - attackingMonster.minDmg)) + attackingMonster.minDmg) * (1 - (defendingMonster.armor * 3 / 100))) * 3;
+                    daneUderzeniaAtk.isCritic = true;
 
-                    return daneUderzenia;
                 }
             }, {
                 name: 'Stealth',
                 cooldown: 2,
                 cooldown_left: 0,
-                use: function (monster1, monster2, daneUderzeniaAtk, daneUderzeniaDef) {
+                use: function (attackingMonster, defendingMonster, daneUderzeniaAtk, daneUderzeniaDef) {
                     // analiza i interpretacja
                     daneUderzeniaDef.uderzenie = 0;
                     daneUderzeniaAtk.uderzenie *= 1.5;
-
-                    return daneUderzenia;
+                    daneUderzeniaAtk.uderzenie = Math.floor(daneUderzeniaAtk.uderzenie);
                 }
             }]
         },
@@ -117,21 +116,18 @@ var Monster = function (opts) {
                 name: 'Heal',
                 cooldown: 2,
                 cooldown_left: 0,
-                use: function (monster1, monster2, daneUderzeniaAtk, daneUderzeniaDef) {
+                use: function (attackingMonster, defendingMonster, daneUderzeniaAtk, daneUderzeniaDef) {
                     // analiza i interpretacja
-                    monster1.hp += monster1.hp*0.25;
-
-                    return daneUderzenia;
+                    attackingMonster.hp += attackingMonster.hp*0.25;
+                    attackingMonster.hp = Math.floor(attackingMonster.hp);
                 }
             }, {
                 name: 'Burst of Mana',
                 cooldown: 2,
                 cooldown_left: 0,
-                use: function (monster1, monster2, daneUderzeniaAtk, daneUderzeniaDef) {
+                use: function (attackingMonster, defendingMonster, daneUderzeniaAtk, daneUderzeniaDef) {
                     // analiza i interpretacja
-                    daneUderzeniaAtk.uderzenie = monster1.maxDmg*2;
-
-                    return daneUderzenia;
+                    daneUderzeniaAtk.uderzenie = attackingMonster.maxDmg*2;
                 }
             }]
         },
@@ -140,23 +136,23 @@ var Monster = function (opts) {
                 name: 'Divine Shield',
                 cooldown: 2,
                 cooldown_left: 0,
-                use: function (monster1, monster2, daneUderzeniaAtk, daneUderzeniaDef) {
+                use: function (attackingMonster, defendingMonster, daneUderzeniaAtk, daneUderzeniaDef) {
                     // analiza i interpretacja
-                    transferredDmg = daneUderzeniaDef.uderzenie * 0.9;
-                    monster1.hp += transferredDmg;
-
-                    return daneUderzenia;
+                    var transferredDmg = daneUderzeniaDef.uderzenie * 0.9;
+                    daneUderzeniaDef.uderzenie -= transferredDmg;
+                    daneUderzeniaDef.uderzenie = Math.floor(daneUderzeniaDef);
+                    attackingMonster.hp += transferredDmg;
+                    attackingMonster.hp = Math.floor(attackingMonster.hp);
                 }
             }, {
                 name: 'Hammer of Glory',
                 cooldown: 2,
                 cooldown_left: 0,
-                use: function (monster1, monster2, daneUderzeniaAtk, daneUderzeniaDef) {
+                use: function (attackingMonster, defendingMonster, daneUderzeniaAtk, daneUderzeniaDef) {
                     // analiza i interpretacja
                     daneUderzeniaAtk.uderzenie *= 1.5;
-                    monster1.hp += daneUderzeniaAtk.uderzenie;
-
-                    return daneUderzenia;
+                    daneUderzeniaAtk.uderzenie = Math.floor(daneUderzeniaAtk.uderzenie);
+                    attackingMonster.hp += daneUderzeniaAtk.uderzenie;
                 }
             }]
         }
@@ -291,7 +287,25 @@ var fight = function () {
     var winner,
         m1DaneUderzenia,
         m2DaneUderzenia,
-        round = 0;
+        round = 0,
+        m1Ability, m2Ability,
+        selectAbility = function(monster) {
+            var ability,
+                selectedAbility = null,
+                i = 0,
+                l = monster.abilities.length;
+            for (i; i < l; i++) {
+                ability = monster.abilities[i];
+                if (ability.cooldown_left > 0) {
+                    ability.cooldown_left -= 1;
+                }
+                if (ability.cooldown_left == 0 && !selectedAbility) {
+                    selectedAbility = ability;
+                    ability.cooldown_left = ability.cooldown;
+                }
+                return selectedAbility;
+            }
+        };
 
     // walka:
     while (monster1.hp > 0 && monster2.hp > 0) {
@@ -299,14 +313,18 @@ var fight = function () {
         m2DaneUderzenia = monster2.uderz(2);
         m1DaneUderzenia = monster1.uderz(1);
 
-        // TU TRZEBA SPRAWDZAC UZYTE ABILITIES, ktore modyfikuja m[1|2]DaneUderzenia
-        // na przyklad:
-        //
+        m1Ability = selectAbility(monster1);
+        m2Ability = selectAbility(monster2);
 
+        if(m1Ability) {
+            console.log(monster1.nazwa + ' uses ability:', m1Ability);
+            m1Ability.use(monster1, monster2, m1DaneUderzenia, m2DaneUderzenia);
+        }
 
-        // sprawdzamy, ktore ability jest uzyte i jezeli jest to dzialamy:
-
-
+        if(m2Ability) {
+            console.log(monster2.nazwa + ' uses ability:', m2Ability);
+            m2Ability.use(monster2, monster1, m2DaneUderzenia, m1DaneUderzenia);
+        }
 
         monster1.hp -= m2DaneUderzenia.uderzenie;
         monster2.hp -= m1DaneUderzenia.uderzenie;
