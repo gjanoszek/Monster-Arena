@@ -40,7 +40,7 @@ var shuffle = function(o){
             attackingMonster.hp *= 0.9;
             attackingMonster.hp = Math.floor(attackingMonster.hp);
             daneUderzeniaAtk.uderzenie *= 3.5;
-            daneUderzeniaAtk.uderzenie = Math.floor(daneUderzeniaAtk.uderzenie)
+            daneUderzeniaAtk.uderzenie = Math.floor(daneUderzeniaAtk.uderzenie);
         }
     }, {
         name: 'Blizzard',
@@ -51,7 +51,7 @@ var shuffle = function(o){
             daneUderzeniaAtk.uderzenie *= 1.5;
             daneUderzeniaAtk.uderzenie = Math.floor(daneUderzeniaAtk.uderzenie);
             daneUderzeniaDef.uderzenie *= 0.5;
-            daneUderzeniaDef.uderzenie = Math.floor(daneUderzeniaDef.uderzenie)
+            daneUderzeniaDef.uderzenie = Math.floor(daneUderzeniaDef.uderzenie);
         }
     }, {
         name: 'Fury',
@@ -62,11 +62,11 @@ var shuffle = function(o){
             daneUderzeniaAtk.uderzenie *= 3.5;
             daneUderzeniaAtk.uderzenie = Math.floor(daneUderzeniaAtk.uderzenie);
             daneUderzeniaDef.uderzenie *= 1.5;
-            daneUderzeniaDef.uderzenie = Math.floor(daneUderzeniaDef.uderzenie)
+            daneUderzeniaDef.uderzenie = Math.floor(daneUderzeniaDef.uderzenie);
         }
     }],
     classes = {
-        'Death Knight': {
+        'Dead Knight': {
             abilities: [{
                 name: 'Wrath of Death',
                 cooldown: 2,
@@ -77,7 +77,7 @@ var shuffle = function(o){
                     defendingMonster.hp -= stolenHp;
                     defendingMonster.hp = Math.floor(defendingMonster.hp);
                     attackingMonster.hp += stolenHp;
-                    attackingMonster.hp = Math.floor(attackingMonster.hp)
+                    attackingMonster.hp = Math.floor(attackingMonster.hp);
                 }
             }, {
                 name: 'Curse',
@@ -88,7 +88,7 @@ var shuffle = function(o){
                     defendingMonster.hp -= defendingMonster.hp*0.1;
                     defendingMonster.hp = Math.floor(defendingMonster.hp);
                     daneUderzeniaDef.uderzenie -= daneUderzeniaDef.uderzenie*0.2;
-                    daneUderzeniaDef.uderzenie = Math.floor(daneUderzeniaDef.uderzenie)
+                    daneUderzeniaDef.uderzenie = Math.floor(daneUderzeniaDef.uderzenie);
                 }
             }]
         },
@@ -205,9 +205,9 @@ Monster.prototype.uderz = function (monsterNum) {
         secondMonster;
 
     if (monsterNum === 1) {
-        secondMonster = monster2
+        secondMonster = monster2;
     } else {
-        secondMonster = monster1
+        secondMonster = monster1;
     }
 
 
@@ -304,7 +304,7 @@ var fight = function () {
                 if (ability.cooldown_left > 0) {
                     ability.cooldown_left -= 1;
                 }
-                if (ability.cooldown_left == 0 && !selectedAbility) {
+                if (ability.cooldown_left === 0 && !selectedAbility) {
                     selectedAbility = ability;
                     ability.cooldown_left = ability.cooldown;
                 }
@@ -397,7 +397,7 @@ $(document).ready(function ($) {
         $('#minDamage' + playerNum).val(minDmg);
         $('#criticChance' + playerNum).val(critChance);
         $('#missChance' + playerNum).val(missChance);
-        $('#gracz' + playerNum + ' [name="monsterClass"]').val(playerClass)
+        $('#gracz' + playerNum + ' [name="monsterClass"]').val(playerClass);
     };
 
 
@@ -416,4 +416,3 @@ $(document).ready(function ($) {
 
 
 });
-

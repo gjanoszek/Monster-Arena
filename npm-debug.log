@@ -1,0 +1,212 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/Users/wetcouch/.nvm/v0.10.33/bin/node',
+1 verbose cli   '/Users/wetcouch/.nvm/v0.10.33/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'grunt',
+1 verbose cli   '~~save~dev' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.33
+4 warn package.json MonsterBattle@0.1.0 No description
+5 warn package.json MonsterBattle@0.1.0 No README data
+6 verbose readDependencies using package.json deps
+7 verbose cache add [ 'grunt', null ]
+8 verbose cache add name=undefined spec="grunt" args=["grunt",null]
+9 verbose parsed url { protocol: null,
+9 verbose parsed url   slashes: null,
+9 verbose parsed url   auth: null,
+9 verbose parsed url   host: null,
+9 verbose parsed url   port: null,
+9 verbose parsed url   hostname: null,
+9 verbose parsed url   hash: null,
+9 verbose parsed url   search: null,
+9 verbose parsed url   query: null,
+9 verbose parsed url   pathname: 'grunt',
+9 verbose parsed url   path: 'grunt',
+9 verbose parsed url   href: 'grunt' }
+10 verbose cache add [ '~~save~dev', null ]
+11 verbose cache add name=undefined spec="~~save~dev" args=["~~save~dev",null]
+12 verbose parsed url { protocol: null,
+12 verbose parsed url   slashes: null,
+12 verbose parsed url   auth: null,
+12 verbose parsed url   host: null,
+12 verbose parsed url   port: null,
+12 verbose parsed url   hostname: null,
+12 verbose parsed url   hash: null,
+12 verbose parsed url   search: null,
+12 verbose parsed url   query: null,
+12 verbose parsed url   pathname: '~~save~dev',
+12 verbose parsed url   path: '~~save~dev',
+12 verbose parsed url   href: '~~save~dev' }
+13 silly lockFile 20ff3fd8-grunt grunt
+14 verbose lock grunt /Users/wetcouch/.npm/20ff3fd8-grunt.lock
+15 silly lockFile d6c6ab6b-save-dev ~~save~dev
+16 verbose lock ~~save~dev /Users/wetcouch/.npm/d6c6ab6b-save-dev.lock
+17 silly lockFile 20ff3fd8-grunt grunt
+18 silly lockFile 20ff3fd8-grunt grunt
+19 silly lockFile d6c6ab6b-save-dev ~~save~dev
+20 silly lockFile d6c6ab6b-save-dev ~~save~dev
+21 verbose addNamed [ 'grunt', '' ]
+22 verbose addNamed [ null, '*' ]
+23 silly lockFile 55f1ff24-grunt grunt@
+24 verbose lock grunt@ /Users/wetcouch/.npm/55f1ff24-grunt.lock
+25 verbose addNamed [ '~~save~dev', '' ]
+26 verbose addNamed [ null, '*' ]
+27 silly lockFile 4a2a5845-save-dev ~~save~dev@
+28 verbose lock ~~save~dev@ /Users/wetcouch/.npm/4a2a5845-save-dev.lock
+29 silly addNameRange { name: 'grunt', range: '*', hasData: false }
+30 verbose request where is /grunt
+31 verbose request registry https://registry.npmjs.org/
+32 verbose request id bef6e0282b4f8169
+33 verbose url raw /grunt
+34 verbose url resolving [ 'https://registry.npmjs.org/', './grunt' ]
+35 verbose url resolved https://registry.npmjs.org/grunt
+36 verbose request where is https://registry.npmjs.org/grunt
+37 info trying registry request attempt 1 at 20:30:55
+38 http GET https://registry.npmjs.org/grunt
+39 silly addNameRange { name: '~~save~dev', range: '*', hasData: false }
+40 verbose request where is /~~save~dev
+41 verbose request registry https://registry.npmjs.org/
+42 verbose url raw /~~save~dev
+43 verbose url resolving [ 'https://registry.npmjs.org/', './~~save~dev' ]
+44 verbose url resolved https://registry.npmjs.org/~~save~dev
+45 verbose request where is https://registry.npmjs.org/~~save~dev
+46 info trying registry request attempt 1 at 20:30:55
+47 http GET https://registry.npmjs.org/~~save~dev
+48 http 404 https://registry.npmjs.org/~~save~dev
+49 verbose headers { date: 'Thu, 05 Mar 2015 19:30:56 GMT',
+49 verbose headers   server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+49 verbose headers   'content-type': 'application/json',
+49 verbose headers   'cache-control': 'max-age=0',
+49 verbose headers   'content-length': '52',
+49 verbose headers   'accept-ranges': 'bytes',
+49 verbose headers   via: '1.1 varnish',
+49 verbose headers   age: '0',
+49 verbose headers   'x-served-by': 'cache-fra1235-FRA',
+49 verbose headers   'x-cache': 'MISS',
+49 verbose headers   'x-cache-hits': '0',
+49 verbose headers   'x-timer': 'S1425583855.824903,VS0,VE176',
+49 verbose headers   'keep-alive': 'timeout=10, max=50',
+49 verbose headers   connection: 'Keep-Alive' }
+50 silly registry.get cb [ 404,
+50 silly registry.get   { date: 'Thu, 05 Mar 2015 19:30:56 GMT',
+50 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+50 silly registry.get     'content-type': 'application/json',
+50 silly registry.get     'cache-control': 'max-age=0',
+50 silly registry.get     'content-length': '52',
+50 silly registry.get     'accept-ranges': 'bytes',
+50 silly registry.get     via: '1.1 varnish',
+50 silly registry.get     age: '0',
+50 silly registry.get     'x-served-by': 'cache-fra1235-FRA',
+50 silly registry.get     'x-cache': 'MISS',
+50 silly registry.get     'x-cache-hits': '0',
+50 silly registry.get     'x-timer': 'S1425583855.824903,VS0,VE176',
+50 silly registry.get     'keep-alive': 'timeout=10, max=50',
+50 silly registry.get     connection: 'Keep-Alive' } ]
+51 silly lockFile 4a2a5845-save-dev ~~save~dev@
+52 silly lockFile 4a2a5845-save-dev ~~save~dev@
+53 http 200 https://registry.npmjs.org/grunt
+54 silly registry.get cb [ 200,
+54 silly registry.get   { date: 'Thu, 05 Mar 2015 19:30:55 GMT',
+54 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+54 silly registry.get     etag: '"A9SBB00OYB2MENXBZ0GKEFLFS"',
+54 silly registry.get     'content-type': 'application/json',
+54 silly registry.get     'cache-control': 'max-age=60',
+54 silly registry.get     'content-length': '88548',
+54 silly registry.get     'accept-ranges': 'bytes',
+54 silly registry.get     via: '1.1 varnish',
+54 silly registry.get     age: '23',
+54 silly registry.get     'x-served-by': 'cache-fra1245-FRA',
+54 silly registry.get     'x-cache': 'HIT',
+54 silly registry.get     'x-cache-hits': '2',
+54 silly registry.get     'x-timer': 'S1425583855.858185,VS0,VE0',
+54 silly registry.get     vary: 'Accept',
+54 silly registry.get     'keep-alive': 'timeout=10, max=50',
+54 silly registry.get     connection: 'Keep-Alive' } ]
+55 silly addNameRange number 2 { name: 'grunt', range: '*', hasData: true }
+56 silly addNameRange versions [ 'grunt',
+56 silly addNameRange   [ '0.1.0',
+56 silly addNameRange     '0.1.1',
+56 silly addNameRange     '0.1.2',
+56 silly addNameRange     '0.2.0',
+56 silly addNameRange     '0.2.1',
+56 silly addNameRange     '0.2.2',
+56 silly addNameRange     '0.2.3',
+56 silly addNameRange     '0.2.4',
+56 silly addNameRange     '0.2.5',
+56 silly addNameRange     '0.2.6',
+56 silly addNameRange     '0.2.7',
+56 silly addNameRange     '0.2.8',
+56 silly addNameRange     '0.2.9',
+56 silly addNameRange     '0.2.10',
+56 silly addNameRange     '0.2.11',
+56 silly addNameRange     '0.2.12',
+56 silly addNameRange     '0.2.13',
+56 silly addNameRange     '0.2.14',
+56 silly addNameRange     '0.2.15',
+56 silly addNameRange     '0.3.0',
+56 silly addNameRange     '0.3.1',
+56 silly addNameRange     '0.3.2',
+56 silly addNameRange     '0.3.3',
+56 silly addNameRange     '0.3.4',
+56 silly addNameRange     '0.3.5',
+56 silly addNameRange     '0.3.6',
+56 silly addNameRange     '0.3.7',
+56 silly addNameRange     '0.3.8',
+56 silly addNameRange     '0.3.9',
+56 silly addNameRange     '0.3.10',
+56 silly addNameRange     '0.3.11',
+56 silly addNameRange     '0.3.12',
+56 silly addNameRange     '0.3.13',
+56 silly addNameRange     '0.3.14',
+56 silly addNameRange     '0.3.15',
+56 silly addNameRange     '0.3.16',
+56 silly addNameRange     '0.3.17',
+56 silly addNameRange     '0.4.0',
+56 silly addNameRange     '0.4.1',
+56 silly addNameRange     '0.4.2',
+56 silly addNameRange     '0.4.3',
+56 silly addNameRange     '0.4.4',
+56 silly addNameRange     '0.4.5',
+56 silly addNameRange     '0.3.13-a',
+56 silly addNameRange     '0.4.0-a',
+56 silly addNameRange     '0.4.0-rc1',
+56 silly addNameRange     '0.4.0-rc2',
+56 silly addNameRange     '0.4.0-rc3',
+56 silly addNameRange     '0.4.0-rc4',
+56 silly addNameRange     '0.4.0-rc5',
+56 silly addNameRange     '0.4.0-rc6',
+56 silly addNameRange     '0.4.0-rc7',
+56 silly addNameRange     '0.4.0-rc8' ] ]
+57 verbose addNamed [ 'grunt', '0.4.5' ]
+58 verbose addNamed [ '0.4.5', '0.4.5' ]
+59 silly lockFile 81abf7ad-grunt-0-4-5 grunt@0.4.5
+60 verbose lock grunt@0.4.5 /Users/wetcouch/.npm/81abf7ad-grunt-0-4-5.lock
+61 silly lockFile ea6cf2d1--npmjs-org-grunt-grunt-0-4-5-tgz https://registry.npmjs.org/grunt/-/grunt-0.4.5.tgz
+62 verbose lock https://registry.npmjs.org/grunt/-/grunt-0.4.5.tgz /Users/wetcouch/.npm/ea6cf2d1--npmjs-org-grunt-grunt-0-4-5-tgz.lock
+63 verbose addRemoteTarball [ 'https://registry.npmjs.org/grunt/-/grunt-0.4.5.tgz',
+63 verbose addRemoteTarball   '56937cd5194324adff6d207631832a9d6ba4e7f0' ]
+64 info retry fetch attempt 1 at 20:30:56
+65 verbose fetch to= /var/folders/zn/qsptykrs7h5_pf7h_rhzys8c0000gn/T/npm-14027-33-POod9/registry.npmjs.org/grunt/-/grunt-0.4.5.tgz
+66 http GET https://registry.npmjs.org/grunt/-/grunt-0.4.5.tgz
+67 http 200 https://registry.npmjs.org/grunt/-/grunt-0.4.5.tgz
+68 silly lockFile ea6cf2d1--npmjs-org-grunt-grunt-0-4-5-tgz https://registry.npmjs.org/grunt/-/grunt-0.4.5.tgz
+69 silly lockFile ea6cf2d1--npmjs-org-grunt-grunt-0-4-5-tgz https://registry.npmjs.org/grunt/-/grunt-0.4.5.tgz
+70 silly lockFile 81abf7ad-grunt-0-4-5 grunt@0.4.5
+71 silly lockFile 81abf7ad-grunt-0-4-5 grunt@0.4.5
+72 silly lockFile 55f1ff24-grunt grunt@
+73 silly lockFile 55f1ff24-grunt grunt@
+74 error 404 404 Not Found: ~~save~dev
+74 error 404
+74 error 404 '~~save~dev' is not in the npm registry.
+74 error 404 You should bug the author to publish it
+74 error 404 It was specified as a dependency of 'MonsterBattle'
+74 error 404
+74 error 404 Note that you can also install from a
+74 error 404 tarball, folder, or http url, or git url.
+75 error System Darwin 14.1.0
+76 error command "/Users/wetcouch/.nvm/v0.10.33/bin/node" "/Users/wetcouch/.nvm/v0.10.33/bin/npm" "install" "grunt" "~~save~dev"
+77 error cwd /Volumes/data/www/MonsterBattle
+78 error node -v v0.10.33
+79 error npm -v 1.4.28
+80 error code E404
+81 verbose exit [ 1, true ]
