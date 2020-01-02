@@ -1,0 +1,24 @@
+{
+  "name": "monster-arena",
+  "version": "1.0.0",
+  "description": "",
+  "main": "MonsterBattle.js",
+  "dependencies": {
+    "serve": "^11.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gjanoszek@github.com/gjanoszek/Monster-Arena.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gjanoszek/Monster-Arena/issues"
+  },
+  "homepage": "https://github.com/gjanoszek/Monster-Arena#readme"
+}

@@ -5,11 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Test</title>
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css"/>
     <link rel="stylesheet" href="css.css"/>
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="MonsterBattle.js"></script>
 </head>
 <body>
@@ -33,21 +29,11 @@
 
             <div class="row">
                 <div class="col-lg-2 monster-name">
-                    <div class="input-group">
-                        <div class="input-group-btn">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
-                                    aria-expanded="false">Presets <span class="caret"></span></button>
-                            <ul class="dropdown-menu monsters" role="menu">
-                                <li data-monsterId="0" data-playerId="1">Skeleton</li>
-                                <li data-monsterId="1" data-playerId="1">Ghost</li>
-                                <li data-monsterId="2" data-playerId="1">Warrior</li>
-                                <li data-monsterId="3" data-playerId="1">Troll</li>
-                            </ul>
-                        </div>
-                        <!-- /btn-group -->
-                        <input id="name1" type="text" class="form-control" placeholder="Name">
-                    </div>
-                    <!-- /input-group -->
+                    <select id="gracz1Data">
+                        <option value="0">Baba Wodna</option>
+                        <option value="1">Strzyga</option>
+                
+                      </select>
                 </div>
                 <!-- /.col-lg-2 -->
             </div>
