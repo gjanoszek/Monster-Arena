@@ -1,5 +1,6 @@
 // template = ['<div class="logLine"> <li class="list-group-item">', '<div class="outer p1">', '<div class="inner player1HPBar">', '</div>', '</div>', '<span class="player1Hp"></span>', '<span class="badge player1">14</span>', '<span class="badge player2">14</span> <div class="round"> Round <span class="roundNo">1</span> </div>', '<div class="outer p2">', '<div class="inner player2HPBar">', '<div></div>', '</div>', '</div>', '<span class="player2Hp"></span>', '</li> </div>'].join(''),
 
+// let game;
 
 class Monster {
     constructor(name, hp, maxDmg, minDmg, critChance, missChance) {
@@ -67,16 +68,19 @@ class Game {
         this.gracz1.hit(this.gracz2);
         this.gracz2.hit(this.gracz1);
         if (this.gracz1.isDead()) {
-            alert(this.gracz2.name + " win");
+            if(confirm('this.gracz2.name + " win. Press OK to restart."')) {
+                const game = new Game();
+            }
         }
         if (this.gracz2.isDead()) {
-            alert(this.gracz1.name + " win");
+            // alert(this.gracz1.name + " win");
+            if(confirm('this.gracz1.name + " win. Press OK to restart."')) {
+                const game = new Game();
+            }
         }
         console.log(this.gracz1, this.gracz2);
     }
 }
-
-
 
 
 

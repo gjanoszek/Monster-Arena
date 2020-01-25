@@ -213,3 +213,30 @@ input, select, textarea {
 }
 
 
+.round {
+    border: 10px orange solid;
+    display: flex;
+    justify-content: space-between;
+
+    
+}
+
+ .monster {
+    border: 5px solid;
+    
+}
+.monster-container {
+    display: flex;
+    flex-direction: column;
+}
+.hp {
+    border: 5px solid;
+    padding-top: 5px;
+    
+    
+}
+.damageDeal {
+    border: 5px solid;
+    padding-top: 10px;
+    
+} 
