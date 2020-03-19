@@ -53,8 +53,7 @@ input, select, textarea {
     order: 2;
     -webkit-order: 2;
     flex: 2;
-    -webkit-flex: 2;
-    
+    -webkit-flex: 2;  
 }
 
 .gracz .row {
@@ -110,10 +109,12 @@ input, select, textarea {
 }
 
 #shared_battle_log {
-    position: relative;
     padding: 0px;
-    padding-top: 25px;
+    padding-top: 50px;
     color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #shared_battle_log .badge {
@@ -147,8 +148,6 @@ input, select, textarea {
 #shared_battle_log .round {
     position: relative;
     bottom: 8px;
-    padding-right: 17px;
-    padding-left: 10px;
     font-size: 20px;
 }
 
@@ -236,8 +235,8 @@ input, select, textarea {
     margin-bottom: 15px;
     width: 130%;
     height: 200px;
-    position: absolute;
-    right: 65px;
+    max-width: 500px;
+    
 }
 .round:hover {
     border: 5px gray solid;
@@ -337,4 +336,40 @@ input {
 .txt {
     padding-top: 25px;
     margin: -10px;
+}
+.list-group {
+    overflow-y: scroll;
+    max-height: 600px;
+    
+}
+.ulWrapper {
+    width: 600px;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.ulWrapper::before {
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: rgb(0,0,0);
+    background: linear-gradient(0deg, rgba(60,60,60,0.1) 0%, rgba(60,60,60,1) 50%);
+    z-index: 9999;
+    position: absolute;
+}
+.ulWrapper::after {
+    content: '';
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: rgb(0,0,0);
+    background: linear-gradient(180deg, rgba(60,60,60,0.1) 0%, rgba(60,60,60,0.7) 50%);
+    z-index: 9999;
+    position: absolute;
+
+.btn-success {
+    margin-bottom: 20px;
 }

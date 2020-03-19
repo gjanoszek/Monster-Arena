@@ -99,6 +99,7 @@ class Game {
                 const game = new Game();
             }
         }
+        this.scroll();
         console.log(this.gracz1, this.gracz2);
     }
     
@@ -125,6 +126,10 @@ class Game {
         d.getElementById('minDamage' + player).value = minDmg;
         d.getElementById('criticChance' + player).value = critChance;
         d.getElementById('missChance' + player).value = missChance;
+    }
+
+    scroll() {
+        document.getElementById('shared_battle_log').scrollTop = 9999999;
     }
 }
 
