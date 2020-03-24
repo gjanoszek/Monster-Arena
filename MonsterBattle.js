@@ -1,7 +1,3 @@
-// template = ['<div class="logLine"> <li class="list-group-item">', '<div class="outer p1">', '<div class="inner player1HPBar">', '</div>', '</div>', '<span class="player1Hp"></span>', '<span class="badge player1">14</span>', '<span class="badge player2">14</span> <div class="round"> Round <span class="roundNo">1</span> </div>', '<div class="outer p2">', '<div class="inner player2HPBar">', '<div></div>', '</div>', '</div>', '<span class="player2Hp"></span>', '</li> </div>'].join(''),
-
-// let game;
-
 class Monster {
     constructor(name, hp, maxDmg, minDmg, critChance, missChance) {
         this.name = name;
@@ -55,27 +51,41 @@ class Game {
             new Monster("Cieniostwór", 100, 6, 2, 25, 20),
             new Monster("Zębacz", 90, 10, 1, 25, 20)
         ]; 
-        this.gracz1 = this.monsters[0];
-        this.gracz2 = this.monsters[0];
-        this.setInputValues(1, this.gracz1.hp, this.gracz1.maxDmg, this.gracz1.minDmg, this.gracz1.critChance, this.gracz1.missChance);
-        this.setInputValues(2, this.gracz2.hp, this.gracz2.maxDmg, this.gracz2.minDmg, this.gracz2.critChance, this.gracz2.missChance);
 
         this.gracz1Data = document.getElementById("gracz1Data");
         this.gracz2Data = document.getElementById("gracz2Data");
+        
+        this.gracz1 = Object.assign(new Monster, this.getSelectedMonster(this.gracz1Data))
+        this.gracz2 = Object.assign(new Monster, this.getSelectedMonster(this.gracz2Data))
+
+        this.setInputValues(1, this.gracz1.hp, this.gracz1.maxDmg, this.gracz1.minDmg, this.gracz1.critChance, this.gracz1.missChance);
+        this.setInputValues(2, this.gracz2.hp, this.gracz2.maxDmg, this.gracz2.minDmg, this.gracz2.critChance, this.gracz2.missChance);
 
         this.gracz1Data.onchange = () => {
-            this.gracz1 = this.monsters[this.gracz1Data.options[this.gracz1Data.selectedIndex].value];
+            this.gracz1 = Object.assign(new Monster, this.getSelectedMonster(this.gracz1Data))
             this.setInputValues(1, this.gracz1.hp, this.gracz1.maxDmg, this.gracz1.minDmg, this.gracz1.critChance, this.gracz1.missChance);
         }
 
         this.gracz2Data.onchange = () => {
-            this.gracz2 = this.monsters[this.gracz2Data.options[this.gracz2Data.selectedIndex].value];
+            this.gracz2 = Object.assign(new Monster, this.getSelectedMonster(this.gracz2Data))
             this.setInputValues(2, this.gracz2.hp, this.gracz2.maxDmg, this.gracz2.minDmg, this.gracz2.critChance, this.gracz2.missChance);
         }
 
         this.space = document.addEventListener('keypress', this.onKeyPress.bind(this));
         this.btn = document.getElementById("beginBattle");
         this.btn.onclick = this.round.bind(this);
+
+
+    }
+
+    getSelectedMonster(playerData) {
+        return this.monsters[playerData.options[playerData.selectedIndex].value];
+    }
+
+    resetGame() {
+        document.getElementById("shared_battle_log").innerHTML = '';
+        this.gracz1 = Object.assign(new Monster, this.getSelectedMonster(this.gracz1Data))
+        this.gracz2 = Object.assign(new Monster, this.getSelectedMonster(this.gracz2Data))
     }
         
     onKeyPress(e) {
@@ -89,14 +99,13 @@ class Game {
         const dmg2 = this.gracz2.hit(this.gracz1);
         document.querySelector('#shared_battle_log').innerHTML += this.newRoundTemplate(this.gracz1.name, this.gracz1.hp, dmg1, this.gracz2.name, this.gracz2.hp, dmg2);
         if (this.gracz1.isDead()) {
-            if(confirm('this.gracz2.name + " win. Press OK to restart."')) {
-                const game = new Game();
+            if(confirm(this.gracz2.name + ' win. Press OK to restart.')) {
+                this.resetGame();
             }
         }
         if (this.gracz2.isDead()) {
-            // alert(this.gracz1.name + " win");
-            if(confirm('this.gracz1.name + " win. Press OK to restart."')) {
-                const game = new Game();
+            if(confirm(this.gracz1.name + ' win. Press OK to restart.')) {
+                this.resetGame();
             }
         }
         this.scroll();
