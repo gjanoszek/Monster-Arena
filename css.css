@@ -121,7 +121,7 @@ input, select, textarea {
     float: none;
 }
 
-#shared_battle_log div, span {
+#shared_battle_log .monster-container > span {
     display: -webkit-inline-flex;
     display: inline-flex;
 }
@@ -149,6 +149,7 @@ input, select, textarea {
     position: relative;
     bottom: 8px;
     font-size: 20px;
+    font-family: fantasy;
 }
 
 #shared_battle_log .player2Hp {
@@ -223,7 +224,7 @@ input, select, textarea {
 
 
 .round {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'fantasy','Roboto', sans-serif;
     font-size: 12px;
     border: 5px orange solid;
     border-radius: 8px;
@@ -231,10 +232,10 @@ input, select, textarea {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 5px;
+    padding: 15px;
     margin-bottom: 15px;
     width: 130%;
-    height: 200px;
+    height: 250px;
     max-width: 500px;
     
 }
@@ -253,12 +254,13 @@ input, select, textarea {
     margin: 5px;
     padding: 15px;
     padding-right: 35px;
-    padding-left: 35px;
+    padding-left: 35px;    
+    padding-top: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
     max-width: 95%;
-    min-height: 45%;
+    min-height: 40%;
     width: 95%;
     font-size: 20px;
 }
@@ -269,17 +271,19 @@ input, select, textarea {
     align-items: center;
     justify-content: center;
     height: 100%;
+    padding-bottom: 8px;
+    
 }
 .hp {
     border: 3px solid #CD5C5C;
     width: 15%;
     height: 15%;
     border-radius: 12px;
-    padding-top: 5px;
     margin: 5px;
     padding: 15px;
     padding-right: 35px;
     padding-left: 35px;
+    padding-top: 20px;
     color: grey;
     align-items: center;
     justify-content: center;
@@ -288,11 +292,8 @@ input, select, textarea {
 .damageDeal {
     border: 3px solid;
     border-radius: 12px;
-    padding-top: 10px;
-    margin: 5px;
-    padding: 15px;
-    padding-right: 35px;
-    padding-left: 35px;
+    margin-top: 15px;
+    padding: 8px 30px 3px;
     align-items: center;
     justify-content: center;
     width: 15%;
@@ -369,7 +370,48 @@ input {
     background: linear-gradient(180deg, rgba(60,60,60,0.1) 0%, rgba(60,60,60,0.7) 50%);
     z-index: 9999;
     position: absolute;
+}
 
 .btn-success {
     margin-bottom: 20px;
+}
+.round-number {
+    font-size: 20px;
+    color: black;
+}
+
+.round__hit {
+    position: relative;
+    margin-top: 16px;
+}
+
+.round__miss {
+    position: absolute;
+    left: 105%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.round__critical {
+    position: absolute;
+    right: 105%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+
+#show-missed1 {
+
+}
+
+#show-missed2 {
+    
+}
+
+#show-critical1 {
+    
+}
+
+#show-critical2 {
+    
 }

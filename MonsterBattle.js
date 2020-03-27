@@ -27,18 +27,24 @@ class Monster {
         return !this.isAlive();
     }
 
+    
 
     hit(targetMonster) {
-        let missed = this.checkIfMiss();
+        const missed = this.checkIfMiss();
+        const critical = this.checkIfCritical();
         let dmg = 0;
         if (!missed) {
             dmg = this.calculateDamage()
-            if (this.checkIfCritical()) {
+            if (critical) {
                 dmg = dmg * 3;
             }
         }
         targetMonster.hp = targetMonster.hp - dmg;
-        return dmg;
+        return {
+            dmg: dmg,
+            missed: missed,
+            critical: critical
+        };
     }
 }
 
@@ -75,7 +81,7 @@ class Game {
         this.btn = document.getElementById("beginBattle");
         this.btn.onclick = this.round.bind(this);
 
-
+        this.roundNumber = 1;
     }
 
     getSelectedMonster(playerData) {
@@ -86,6 +92,7 @@ class Game {
         document.getElementById("shared_battle_log").innerHTML = '';
         this.gracz1 = Object.assign(new Monster, this.getSelectedMonster(this.gracz1Data))
         this.gracz2 = Object.assign(new Monster, this.getSelectedMonster(this.gracz2Data))
+        this.roundNumber = 0;
     }
         
     onKeyPress(e) {
@@ -95,9 +102,9 @@ class Game {
         }
     }
     round() {
-        const dmg1 = this.gracz1.hit(this.gracz2);
-        const dmg2 = this.gracz2.hit(this.gracz1);
-        document.querySelector('#shared_battle_log').innerHTML += this.newRoundTemplate(this.gracz1.name, this.gracz1.hp, dmg1, this.gracz2.name, this.gracz2.hp, dmg2);
+        const hit1 = this.gracz1.hit(this.gracz2);
+        const hit2 = this.gracz2.hit(this.gracz1);
+        document.querySelector('#shared_battle_log').innerHTML += this.newRoundTemplate(this.gracz1.name, this.gracz1.hp, hit1.dmg, hit1.missed, hit1.critical,  this.gracz2.name, this.gracz2.hp, hit2.dmg, hit2.missed, hit2.critical);
         if (this.gracz1.isDead()) {
             if(confirm(this.gracz2.name + ' win. Press OK to restart.')) {
                 this.resetGame();
@@ -110,20 +117,34 @@ class Game {
         }
         this.scroll();
         console.log(this.gracz1, this.gracz2);
+        console.log(hit1, hit2)
+
+        this.roundNumber++
     }
     
-    newRoundTemplate(name1, hp1, dmg1, name2, hp2, dmg2) {
+
+    
+    newRoundTemplate(name1, hp1, dmg1, missed1, critical1, name2, hp2, dmg2, missed2, critical2) {
         return `
         <li class="round">
             <div class="monster-container">
                 <h3 class="monster" id="monster1">${name1}</h3>
-                <span class="hp" id=hp-monster1>${hp1}</span>
-                <span class="damageDeal" id=dd-monster1>${dmg1}</span>
+                <span class="hp" id="hp-monster1">${hp1}</span>
+                <div class="round__hit">
+                    <span class="damageDeal" id="dd-monster1">${dmg1}</span>
+                    <span class="round__miss" id="show-missed1">${missed1 ? 'miss!' : '' }</span>
+                    <span class="round__critical" id="show-critical1">${critical1 && !missed1 ? 'critical!' : '' }<span/>
+                </div>
             </div>
+            <div class="round-number">round ${this.roundNumber}</div>
             <div class="monster-container">
                 <h3 class="monster" id="monster2">${name2}</h3>
-                <span class="hp" id=hp-monster2>${hp2}</span>
-                <span class="damageDeal" id=dd-monster2>${dmg2}</span>
+                <span class="hp" id="hp-monster2">${hp2}</span>
+                <div class="round__hit">
+                    <span class="damageDeal" id="dd-monster2">${dmg2}</span>
+                    <span class="round__miss" id="show-missed2">${missed2 ? 'miss!' : '' }</span>
+                    <span class="round__critical" id="show-critical2">${critical2 && !missed2 ? 'critical!' : '' }</span>
+                </div>
             </div>
         </li>
     `
